@@ -1,7 +1,7 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "5.4.1",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "name": "Peerbuds Front End",
+  "version": "1.0.0",
+  "description": "",
   "keywords": [
     "angular2",
     "webpack",
@@ -147,10 +147,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://github.com/peerbuds/peerbuds-client.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": ""
   },
   "engines": {
     "node": ">= 4.2.1",
