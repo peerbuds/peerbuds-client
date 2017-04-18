@@ -21,14 +21,16 @@ export class AuthenticationService {
     }
 
     public logout() {
-        let token;
-        if(localStorage.getItem('currentUser') != null)
+      	let token;
+        if(localStorage.length != 0 && localStorage.getItem('currentUser') != null)
         {
+           console.log("before http call");
            token = JSON.parse(localStorage.getItem('currentUser')).token.properties.id;
-           this.http.post(this.config.apiUrl + '/api/peers/logout')
-               .map((response: Response) => {
+           console.log(this.config.apiUrl + '/api/peers/logout');
+           return this.http.post(this.config.apiUrl + '/api/peers/logout', { accessToken: token})
+               .map((res: Response) => {
                    console.log("Logged out from server");
-               });
+               }).subscribe();
         }
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');

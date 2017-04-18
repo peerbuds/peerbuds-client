@@ -28,10 +28,11 @@ import { AppConfig } from './app.config';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService} from './_services/index';
-import { LoginComponent } from './login';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
+import { LoginComponent } from './login/index';
+import { HomeComponent } from './home/index';
+import { AboutComponent } from './about/index';
+import { RegisterComponent } from './register/index';
+import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
 
 import '../styles/styles.scss';
@@ -60,6 +61,7 @@ type StoreType = {
     AboutComponent,
     LoginComponent,
     HomeComponent,
+    RegisterComponent,
     NoContentComponent,
     XLargeDirective
   ],

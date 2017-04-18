@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
+import { LoginComponent } from './login/index';
+import { HomeComponent } from './home/index';
+import { AboutComponent } from './about/index';
+import { RegisterComponent } from './register/index';
 import { NoContentComponent } from './no-content';
 import { AuthGuard } from './_guards/index';
 
@@ -12,9 +13,8 @@ export const ROUTES: Routes = [
   { path: 'home',  component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login',  component: LoginComponent},
   { path: 'about', component: AboutComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'detail', loadChildren: './+detail#DetailModule'},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
   { path: '**',    component: NoContentComponent },
 ];
-
-//export const routing = RouterModule.forRoot(appRoutes);
