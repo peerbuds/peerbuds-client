@@ -2,12 +2,10 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
+import { AuthenticationService } from '../_services/index';
 import { AppState } from '../app.service';
 import { XLargeDirective } from './x-large';
 
-//import { User } from '../_models/index';
-//import { UserService } from '../_services/index';
 
 @Component({
   // The selector is what angular internally uses
@@ -24,27 +22,18 @@ import { XLargeDirective } from './x-large';
 export class HomeComponent implements OnInit {
   // Set our default values
   public localState = { value: '' };
-  //currentUser: User;
-  //users: User[] = [];
+
 
   // TypeScript public modifiers
   constructor(
-    public appState: AppState//,
-    //private userService: UserService
-  ) {
-    //this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+    public appState: AppState,
+    public authenticationService: AuthenticationService
+    ) {
+    }
 
   public ngOnInit() {
     //this.loadAllUsers();
   }
 
-  /*deleteUser(_id: string) {
-      this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
-  }
-
-  private loadAllUsers() {
-      this.userService.getAll().subscribe(users => { this.users = users; });
-  }*/
 
 }

@@ -1,6 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response, BaseRequestOptions, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'angular2-cookie/core';
@@ -12,7 +13,9 @@ export class AuthenticationService {
 
     public key = 'access_token';
 
-    constructor(private http: Http, private config: AppConfig, private _cookieService:CookieService) {}
+    constructor(private http: Http, private config: AppConfig, private _cookieService:CookieService,
+    private route: ActivatedRoute,
+    public router: Router) {}
 
     getCookie(key: string){
       return this._cookieService.get(key);
@@ -40,9 +43,16 @@ export class AuthenticationService {
                    // login successful if there's a jwt token in the response
                    let user = response.json();
                    if (user && user.access_token) {
-                       //Set Cookie
-                       //this.setCookie("access_token", user.access_token);
-                       //this.setCookie("userId", user.userId);
+                        //Set Cookie
+                        if(!this.getCookie("access_token"))
+                        {
+                          console.log(this.getCookie("access_token"));
+                          this.setCookie("access_token", user.access_token);
+                        }
+                        if(!this.getCookie("userId")){
+                          console.log(this.getCookie("userId"));
+                          this.setCookie("userId", user.userId);
+                        }
                    }
                  }, (err) => {
                      console.log('Error: ' + err);
@@ -104,12 +114,15 @@ export class AuthenticationService {
     }
 
     public logout() {
+        console.log("Logging off");
         if(this.getCookie(this.key))
         {
             this.http.get(this.config.apiUrl + '/auth/logout',)
                 .map((res: Response) => {
                     console.log("Logged out from server");
                     this.removeCookie(this.key);
+                    this.removeCookie("userId");
+                    this.router.navigate(["/login"]);
                 }).subscribe();
         }
 
