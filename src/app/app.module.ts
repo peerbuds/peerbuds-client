@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
-/*import { Angular2SocialLoginModule } from "angular2-social-login";*/
 import {
   NgModule,
   ApplicationRef
