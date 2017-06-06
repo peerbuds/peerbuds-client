@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
+/*import { Angular2SocialLoginModule } from "angular2-social-login";*/
 import {
   NgModule,
   ApplicationRef
@@ -50,6 +54,23 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
+/*let providers = {
+    "google": {
+      "clientId": "GOOGLE_CLIENT_ID"
+    },
+    "linkedin": {
+      "clientId": "LINKEDIN_CLIENT_ID"
+    },
+    "facebook": {
+      "clientId": "FACEBOOK_CLIENT_ID",
+      "apiVersion": "v2.4"
+    },
+    "twitter": {
+      "clientId": "twitter client id",
+      "apiVersion": "v2.4"
+    }
+  };*/
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -77,6 +98,7 @@ type StoreType = {
     AppConfig,
     AuthGuard,
     AlertService,
+    CookieService,
     AuthenticationService
   ]
 })
@@ -125,3 +147,5 @@ export class AppModule {
   }
 
 }
+
+//Angular2SocialLoginModule.loadProvidersScripts(providers);

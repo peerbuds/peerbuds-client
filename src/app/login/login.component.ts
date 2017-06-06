@@ -24,19 +24,20 @@ export class LoginComponent implements OnInit {
   constructor(
     public appState: AppState,
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     public authenticationService: AuthenticationService,
     private alertService: AlertService) {
-      console.log(authenticationService);
     }
 
   public ngOnInit() {
     // reset login status
-    debugger;
-    console.log(this);
-    this.authenticationService.logout();
+    //this.authenticationService.logout();
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  private redirect() {
+    this.router.navigate([ this.returnUrl ]); //use the stored url here
   }
 
   login() {
@@ -50,6 +51,14 @@ export class LoginComponent implements OnInit {
                   this.alertService.error(error._body);
                   this.loading = false;
               });
+  }
+
+  signup(provider){
+    this.authenticationService.signup(provider).subscribe(
+      (data) => {
+        this.user=data;
+      }
+    );
   }
 
 

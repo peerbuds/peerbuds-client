@@ -9,12 +9,11 @@ import { AuthGuard } from './_guards/index';
 import { DataResolver } from './app.resolver';
 
 export const ROUTES: Routes = [
-  { path: '',      component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'home',  component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login',  component: LoginComponent},
-  { path: 'about', component: AboutComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'detail', loadChildren: './+detail#DetailModule'},
-  { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
-  { path: '**',    component: NoContentComponent },
+{ path: '',      component: HomeComponent, canActivate: [AuthGuard] },
+{ path: 'login',  component: LoginComponent},
+{ path: 'about', component: AboutComponent },
+{ path: 'register', component: RegisterComponent },
+{ path: 'detail', loadChildren: './+detail#DetailModule'},
+{ path: 'barrel', loadChildren: './+barrel#BarrelModule'},
+{ path: '**',    component: NoContentComponent },
 ];
