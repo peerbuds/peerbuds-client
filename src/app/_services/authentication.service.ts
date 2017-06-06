@@ -44,7 +44,7 @@ export class AuthenticationService {
                    let user = response.json();
                    if (user && user.access_token) {
                         //Set Cookie
-                        if(!this.getCookie("access_token"))
+                        /*if(!this.getCookie("access_token"))
                         {
                           console.log(this.getCookie("access_token"));
                           this.setCookie("access_token", user.access_token);
@@ -52,7 +52,7 @@ export class AuthenticationService {
                         if(!this.getCookie("userId")){
                           console.log(this.getCookie("userId"));
                           this.setCookie("userId", user.userId);
-                        }
+                        }*/
                    }
                  }, (err) => {
                      console.log('Error: ' + err);
@@ -83,7 +83,6 @@ export class AuthenticationService {
     }
 
     public register(username: string, password: string, email: string) {
-        debugger;
         var body = `{"username":"${username}","password":"${password}","email":"${email}"}`;
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -117,7 +116,7 @@ export class AuthenticationService {
         console.log("Logging off");
         if(this.getCookie(this.key))
         {
-            this.http.get(this.config.apiUrl + '/auth/logout',)
+            this.http.get(this.config.apiUrl + '/auth/logout',{ accessToken: this.key })
                 .map((res: Response) => {
                     console.log("Logged out from server");
                     this.removeCookie(this.key);
@@ -125,6 +124,21 @@ export class AuthenticationService {
                     this.router.navigate(["/login"]);
                 }).subscribe();
         }
+
+        /*var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('access_token', this.getCookie(this.key));
+        let options = new RequestOptions({ headers: headers, withCredentials: true });
+            this.http
+                   .get(this.config.apiUrl + '/auth/logout', options)
+                   .map((response: Response) => {
+                       this.removeCookie(this.key);
+                       this.removeCookie("userId");
+                       this.router.navigate(["/login"]);
+                     }
+                   }, (err) => {
+                       console.log('Error: ' + err);
+             });*/
 
 
     }
