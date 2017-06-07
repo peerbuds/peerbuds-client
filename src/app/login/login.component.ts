@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   signup(provider){
     this.authenticationService.signup(provider).subscribe(
       (data) => {
-        this.user=data;
+//        this.user=data;
       }
     );
   }
