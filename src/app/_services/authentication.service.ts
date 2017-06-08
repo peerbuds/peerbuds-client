@@ -21,14 +21,14 @@ export class AuthenticationService {
       return this._cookieService.get(key);
     }
 
-    setCookie(key: string, value: string, options?: CookieOptionsArgs)
+    setCookie(key: string, value: string)
     {
-      this._cookieService.put(key, value, options);
+      this._cookieService.put(key, value);
     }
 
-    removeCookie(key: string, options?: CookieOptionsArgs)
+    removeCookie(key: string)
     {
-      this._cookieService.remove(key, options);
+      this._cookieService.remove(key);
     }
 
     public login(username: string, password: string) {
@@ -116,7 +116,7 @@ export class AuthenticationService {
         console.log("Logging off");
         if(this.getCookie(this.key))
         {
-            this.http.get(this.config.apiUrl + '/auth/logout',{ accessToken: this.key })
+            this.http.get(this.config.apiUrl + '/auth/logout',{ accessToken: this.getCookie(this.key) })
                 .map((res: Response) => {
                     console.log("Logged out from server");
                     this.removeCookie(this.key);
