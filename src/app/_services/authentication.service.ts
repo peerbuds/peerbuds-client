@@ -116,7 +116,7 @@ export class AuthenticationService {
         console.log("Logging off");
         if(this.getCookie(this.key))
         {
-            this.http.get(this.config.apiUrl + '/auth/logout',{ accessToken: this.getCookie(this.key) })
+            this.http.get(this.config.apiUrl + '/auth/logout',{})
                 .map((res: Response) => {
                     console.log("Logged out from server");
                     this.removeCookie(this.key);
