@@ -1,6 +1,173 @@
 /*styles for onboarding content only*/
-.step
-{
-  font-size: 20px;
-  color: #666;
+.onboarding-content{
+  margin-bottom:0!important;
+  padding-bottom:136px;
+}
+.onboarding{
+  .title{
+    font-size:29px;
+    margin:0 0 52px 0;
+    color:#666;
+  }
+  .step
+  {
+    font-size: 14px;
+    color: #666;
+    margin-bottom:25px;
+  }
+  .stepHeader{
+    font-size:27px;
+    margin-bottom:20px;
+  }
+  .upload-image-section{
+    margin-bottom:30px;
+    .profile-photo{
+      width:164px;
+      height:164px;
+      background-color: #f1f1f1;
+      display:inline-block;
+      margin-right:25px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+  .onboarding-btn{
+    padding:10px 100px;
+  }
+  textarea{
+    height:80px;
+    resize: none;
+  }
+  .lookingFor{
+
+      .lookingFor-thumb{
+        background-color: #e2e2e2;
+        padding:50px 0;
+        height:225px;
+        position:relative;
+        i{
+          display:inline-block;
+          position:absolute;
+          width:100px;
+          height:100px;
+          left:50%;
+          top:50%;
+          margin:-50px 0 0 -50px;
+          &.personal{
+            background:url("../../images/man-user.svg") no-repeat scroll center center / 100%;
+          }
+          &.professional{
+            background:url("../../images/man.svg") no-repeat scroll center center / 100%;
+          }
+          &.intellectual{
+            background:url("../../images/intellectual.svg") no-repeat scroll center center / 100%;
+          }
+          &.auditory{
+            background:url("../../images/auditory.svg") no-repeat scroll center center / 100%;
+          }
+          &.read-write{
+            background:url("../../images/read-write.svg") no-repeat scroll center center / 100%;
+          }
+        }
+      }
+      .learner{
+        height:175px;
+         i{
+           width:75px;
+           height:75px;
+           margin:-37px 0 0 -37px;
+           &.fa{
+             font-size:75px;
+             color:#666;
+           }
+         }
+      }
+      .lookingForTitle{
+        display:block;
+        margin-top:10px;
+        font-size:20px;
+        color:#666;
+      }
+      .lookingForDesc{
+        margin:10px 0 0 0;
+        font-size:13px;
+        color:#666;
+      } 
+  }
+}
+label.check > input, label.radiobox > input{display: none;}
+  label.check, label.radiobox{
+    font-size: 14px;
+    font-weight: normal;
+    position:absolute;
+    top:5px;
+    right:25px;
+    z-index: 1;
+  }
+  label.check i, label.radiobox i {
+      height: 24px;
+      width: 24px;
+      background-color: #fff;
+      display: inline-block;
+      position: relative;
+      left: 0px;
+      top: 5px;
+      border-radius:5px;
+      border:1px solid #ccc;
+      font-style:normal;
+  }
+  label.radiobox i{border-radius:50%;}
+  label.check [type=checkbox]:checked + i, label.radiobox [type=radio]:checked + i{background-color: #0091ea;border:none;}
+  label.check [type=checkbox]:checked + i:before, label.radiobox [type=radio]:checked + i:before {
+    display:inline-block;
+    content: '\f00c';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    color:#fff;
+    font-family:"FontAwesome";
+  }
+  label.radiobox [type=radio]:checked + i:before {top:3px; left:5px;}
+
+/* ----- onboarding footer ----- */
+.onboarding-footer{
+  padding:20px 0;
+  background-color:#fbfbfb;
+  position:absolute;
+  width:100%;
+  bottom:0;
+  left:0;
+  right:0;
+
+  .label-completed{
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #999;
+  }
+  .progressBar{
+    margin-top:10px;
+    background-color: #e2e2e2;
+    width:410px;
+    height:8px;
+    position: relative;
+    span{
+      display:inline-block;
+      position: absolute;
+      height:100%;
+      transition:0.2s;
+      background-color:#9b9b9b;
+    }
+  }
+  .onboarding-footer-btn{
+    color:#ccc;
+    float:right;
+    .fa-chevron-right{
+      vertical-align: middle;
+    }
+    &:hover, &:active, &:focus{
+      color:#fff;
+      box-shadow:none;
+      border:none;
+    }
+  }
 }

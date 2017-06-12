@@ -18,22 +18,7 @@ import { AppState } from './app.service';
   styleUrls: [
     './app.component.css'
   ],
-  template: `
-
-
-    <main>
-      <alert></alert>
-      <router-outlet></router-outlet>
-    </main>
-
-<footer>
-  <span>Peerbuds <a [href]="url">#Peerbuds</a></span>
-  <div>
-    <a [href]="url">Contact Us</a>
-  </div>
-</footer>
-
-  `
+  templateUrl:'app.component.html'
 })
 export class AppComponent implements OnInit {
   public peerbudslogo = 'assets/img/favicon.ico';

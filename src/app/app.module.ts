@@ -40,7 +40,7 @@ import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
 
 import '../styles/styles.scss';
-import '../styles/headings.css';
+// import '../styles/headings.css';
 
 // Application wide providers
 const APP_PROVIDERS = [

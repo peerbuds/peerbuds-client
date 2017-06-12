@@ -1,14 +1,226 @@
-<div style="margin:10px;">
-  <h1 x-large class="sample-content">Welcome to Peerbuds</h1>
-    <span style="float:right;"><a href="#" (click)="authenticationService.logout()">Logout</a></span> <!--[routerLink]="['/login']"-->
-    <div class="step">STEP 1 OF 10</div>
-    <div class="stepHeader">Tell us a litle about yourself</div>
-  <hr>
+<div class="position-relative">
 
-  <div>
-
-
-
+  <!-- content starts here-->
+  <div id="content" class="onboarding-content">
+    <div class="container-fluid">
+      <div class="onboarding step-1 hide">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Welcome to Peerbuds</h1>
+            <!--<span style="float:right;"><a href="#" (click)="authenticationService.logout()">Logout</a></span>-->
+            <!--[routerLink]="['/login']"-->
+            <div class="step">STEP 1 OF 9</div>
+            <div class="stepHeader">Tell us a little about yourself</div>
+            <div class="upload-image-section">
+              <div class="profile-photo">
+                <img src="http://lorempixel.com/164/164/people/9" class="" alt="Profile Photo" title="Scott Medina" width="164">
+              </div>
+              <a href="#" class="btn btn-default btn-lg">Upload Image</a>
+            </div>
+            <form>
+              <div class="row">
+                <div class="col-sm-6 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">First Name</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label class="display-block">Last Name</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <div class="stepHeader">What languages do you speak?</div>
+                    <input type="text" class="form-control" placeholder="Search for languages" />
+                  </div>
+                </div>
+                <div class="col-sm-6 margin-bottom-30">
+                  <div class="form-group">
+                    <div class="stepHeader">Where are you from?</div>
+                    <select class="form-control">
+                    <option value="">Search for a country</option>
+                    <option value="US">USA</option>
+                    <option value="AU">AUS</option>
+                    <option value="IN">INDIA</option>
+                    <option value="CH">CHINA</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default">Next</button>
+            </form>
+          </div>
+          <!-- onboarding ends here-->
+        </div>
+      </div>
+      <!-- step 1 ends here -->
+      <div class="onboarding step-2 hide">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">We're glad you want to teach</h1>
+            <div class="step">STEP 2 OF 9</div>
+            <form>
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">Create your headline</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">Give us a short descrip@on about yourself</label>
+                    <textarea class="form-control" maxlength="5000"></textarea>
+                    <span class="text-right text-grey display-block margin-top-5">max. 5000 chars</span>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 2 ends here -->
+      <div class="onboarding step-3 hide">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 3 OF 9</div>
+            <div class="stepHeader">Tell us what you are looking for</div>
+            <form>
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-01">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="personal"></i>
+                        </div>
+                        <span class="lookingForTitle">Personal</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-02">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="professional"></i>
+                        </div>
+                        <span class="lookingForTitle">Professional</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-03">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="intellectual"></i>
+                        </div>
+                        <span class="lookingForTitle">Intellectual</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default ">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 3 ends here -->
+      <div class="onboarding step-4">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 4 OF 9</div>
+            <div class="stepHeader">What type of learner are you?</div>
+            <form>
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-04">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb learner">
+                          <i class="auditory"></i>
+                        </div>
+                        <span class="lookingForTitle">Auditory</span>
+                        <p class="lookingForDesc">You learn well when aided by music, sound, rhyme, rhythm, speaking or listening</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-05">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb learner">
+                          <i class="fa fa-eye"></i>
+                        </div>
+                        <span class="lookingForTitle">Visual</span>
+                        <p class="lookingForDesc">You learn well when aided by images, pictures, and spaHal organizaHon of elements</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-06">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb learner">
+                          <i class="read-write"></i>
+                        </div>
+                        <span class="lookingForTitle">Read &amp; Write</span>
+                        <p class="lookingForDesc">You learn well by reading or wriHng the material you want to learn</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
+                            <input type="checkbox" id="chk-07">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb learner">
+                          <i class="kinesthetic"></i>
+                        </div>
+                        <span class="lookingForTitle">Kinesthetic</span>
+                        <p class="lookingForDesc">You learn well when you can move your body, and/or use your hands and sense of touch</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default ">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 4 ends here -->
+    </div>
   </div>
+  <!-- content ends here-->
 
+  <footer class="onboarding-footer ">
+    <div class="container-fluid ">
+      <div class="pull-left ">
+        <span class="label-completed ">0% Completed</span>
+        <div class="progressBar ">
+          <span style="width:11%; "></span>
+        </div>
+      </div>
+      <a class="onboarding-footer-btn btn btn-lg btn-default "><i class="fa fa-chevron-right "></i></a>
+    </div>
+  </footer>
 </div>
