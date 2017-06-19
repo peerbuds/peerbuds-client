@@ -33,7 +33,7 @@ body {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
-	color:#333;
+	color:$dark-grey;
 	font-family:'ProximaNovaSemibold';
 }
 h2, .h2{
@@ -43,7 +43,7 @@ a{
 	color:#3498db;
 
 	&:hover, &:focus{
-		color:#333;
+		color:$dark-grey;
 		opacity:0.8;
 	}
 	&:link, &:active, &:focus {
@@ -88,7 +88,7 @@ input {
 		padding:12px 15px;
 
 		> a{
-			color:#333;
+			color:$dark-grey;
 			padding:0;
 
 			&:focus, &:hover {
@@ -105,14 +105,13 @@ input {
 	}
 	li {
 		display: inline-block;
-		float: left;
 	}
 }
 
 .navbar-default {
   .navbar-nav > li > a {
     &:hover, &:focus {
-      color: #333;
+      color: $dark-grey;
     }
   }
   .header-left > {
@@ -407,7 +406,7 @@ input {
 }
 
 #content{
-	margin:65px auto 80px;
+	padding:65px 0 80px;
 }
 
 /* ----- sidebar starts  ----- */
@@ -440,7 +439,7 @@ input {
 
 			a{
 				font-size:0.9375em;
-				color:#666;
+				color:$grey;
 			}
 
 			.dot:before{
@@ -477,7 +476,8 @@ input {
 	padding-left:40px;
 
 	.slideTitle{
-		font-size: 20px; color: #666;
+		font-size: 20px;
+		color: $grey;
 	}
 
 	.sliderSubject{
@@ -500,8 +500,8 @@ input {
 }
 
 .fromSocialCountBox{
-	font-size:0.8750em; 
-	color:#999;
+	font-size:1em; 
+	color:#666;
 	margin-top:5px;
 
 	span{
@@ -566,9 +566,18 @@ input {
   }
 }
 .title {
-  font-size: 1.125em;
+  font-size: 1.1250em;
   font-weight: bold;
   margin: 20px 0 15px 0;
+}
+.title-14, .title-18{
+  display:block;
+  font-size: 0.8750em;
+  font-weight: bold;
+  margin: 10px 0 10px 0;
+}
+.title-18{
+  font-size: 1.1250em;
 }
 /* ---------- owl-carousel customization ---------- */
 .owl-carousel .owl-item img.thumb-circle{
@@ -749,12 +758,12 @@ input {
 	color:#999;
 	line-height: 25px;
 	width:60%;
-	magin-bottom:10px;
+	margin-bottom:10px;
 }
 .userCount{
 	padding-left:18px;
 }
-.userCount:before, .userLikes:before{
+.userCount:before, .userLikes:before, .userSees:before{
 	display:inline-block;
 	position:absolute;
 	content:"";
@@ -770,6 +779,14 @@ input {
 .userLikes:before{
 	width:15px;
 	background:url("../images/user-like.png") no-repeat scroll 0 0 / 15px;
+}
+.userSees{
+	padding-left:23px;
+}
+.userSees:before{
+	width:18px;
+	height:16px;
+	background:url("../images/eye-outline.svg") no-repeat scroll center / 18px;
 }
 .userRating{
 	color:#ff9000;
@@ -810,7 +827,20 @@ input {
 	overflow:hidden;
 	display:inline-block;
 }
-
+.btn-default:focus, .btn-primary:focus{
+	outline:none;
+	box-shadow:none;
+}
+.btn-primary{
+	background-color: #fff;
+	border-color:#333;
+	color:#333;
+}
+.btn-primary:hover, .btn-primary:active .btn-primary:focus, .btn-primary:active:after{
+	background-color: #e5e5e5!important;	
+	border-color:#333!important;
+	color:#333!important;
+}
 /* ----- Model Box CSS ----- */
 .modal {
 	padding: 0 !important;
@@ -876,7 +906,7 @@ input {
   a {
     display: inline-block;
     margin-right: 22px;
-    color: #333;
+    color: $dark-grey;
     font-size: 0.8750em;
     &:last-child {
       margin-right: 0;

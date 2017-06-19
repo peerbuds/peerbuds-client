@@ -159,3 +159,7 @@
 @mixin fs($size){
   font-size: em($size,16);
 }
+
+@mixin lh($size){
+  line-height: $size+px;
+}
