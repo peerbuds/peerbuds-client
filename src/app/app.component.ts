@@ -7,6 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { AppState } from './app.service';
+import { AuthenticationService } from './_services/index';
 
 /*
  * App Component
@@ -19,30 +20,50 @@ import { AppState } from './app.service';
     './app.component.css'
   ],
   template: `
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Peerbuds</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
 
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><span style="float:right;margin-right:20px;margin-top:20px;"><a href="#" *ngIf="loggedIn" (click)="authenticationService.logout()">Logout</a></span></li>
+            <li><a *ngIf="!loggedIn" routerLink="register">Sign Up</a></li>
+            <li><a *ngIf="!loggedIn" routerLink="login">Login</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  </header>
 
     <main>
       <alert></alert>
       <router-outlet></router-outlet>
     </main>
 
-<footer>
-  <span>Peerbuds <a [href]="url">#Peerbuds</a></span>
-  <div>
-    <a [href]="url">Contact Us</a>
-  </div>
-</footer>
-
+  <footer class="footer">
+    <div class="container">
+      <a [href]="url">Contact Us</a>
+    </div>
+  </footer>
   `
 })
 export class AppComponent implements OnInit {
   public peerbudslogo = 'assets/img/favicon.ico';
   public name = 'Peerbuds';
   public url = 'https://peerbuds.com';
+  public loggedIn = false;
 
   constructor(
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    public authenticationService: AuthenticationService
+  ) {
+    this.loggedIn = this.authenticationService.isLoggedIn();
+  }
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);
