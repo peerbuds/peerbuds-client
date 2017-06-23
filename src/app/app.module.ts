@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModel, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import {
@@ -18,6 +17,8 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { ImageUploadModule } from 'angular2-image-upload';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -30,7 +31,11 @@ import { AppState, InternalStateType } from './app.service';
 import { AppConfig } from './app.config';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService} from './_services/index';
+import { AlertService
+        , AuthenticationService
+        , CountryPickerService
+        , LanguagePickerService } from './_services/index';
+
 import { LoginComponent } from './login/index';
 import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
@@ -38,6 +43,7 @@ import { AboutComponent } from './about/index';
 import { RegisterComponent } from './register/index';
 import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
+
 
 import '../styles/styles.scss';
 // import '../styles/headings.css';
@@ -54,7 +60,7 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
-/*let providers = {
+/* let providers = {
     "google": {
       "clientId": "GOOGLE_CLIENT_ID"
     },
@@ -72,7 +78,7 @@ type StoreType = {
   };*/
 
 /**
- * `AppModule` is the main entry point into Angular2's bootstraping process
+ * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -90,8 +96,10 @@ type StoreType = {
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ImageUploadModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -100,7 +108,9 @@ type StoreType = {
     AuthGuard,
     AlertService,
     CookieService,
-    AuthenticationService
+    AuthenticationService,
+    CountryPickerService,
+    LanguagePickerService
   ]
 })
 export class AppModule {

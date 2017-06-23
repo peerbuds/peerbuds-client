@@ -7,6 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { AppState } from './app.service';
+import { AuthenticationService } from './_services/index';
 
 /*
  * App Component
@@ -24,10 +25,14 @@ export class AppComponent implements OnInit {
   public peerbudslogo = 'assets/img/favicon.ico';
   public name = 'Peerbuds';
   public url = 'https://peerbuds.com';
+  public loggedIn = false;
 
   constructor(
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    public authenticationService: AuthenticationService
+  ) {
+    this.loggedIn = this.authenticationService.isLoggedIn();
+  }
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);

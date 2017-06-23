@@ -12,10 +12,13 @@ import { AppConfig } from '../app.config';
 export class AuthenticationService {
 
     public key = 'access_token';
+    private loggedIn = false;
 
     constructor(private http: Http, private config: AppConfig, private _cookieService:CookieService,
     private route: ActivatedRoute,
-    public router: Router) {}
+    public router: Router) {
+      this.loggedIn = !!this.getCookie(this.key);
+    }
 
     getCookie(key: string){
       return this._cookieService.get(key);
@@ -116,7 +119,7 @@ export class AuthenticationService {
         console.log("Logging off");
         if(this.getCookie(this.key))
         {
-            this.http.get(this.config.apiUrl + '/auth/logout')
+            this.http.get(this.config.apiUrl + '/auth/logout',{})
                 .map((res: Response) => {
                     console.log("Logged out from server");
                     this.removeCookie(this.key);
@@ -139,7 +142,9 @@ export class AuthenticationService {
                    }, (err) => {
                        console.log('Error: ' + err);
              });*/
+    }
 
-
+    public isLoggedIn() {
+        return this.loggedIn;
     }
 }

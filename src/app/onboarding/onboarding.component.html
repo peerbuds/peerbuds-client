@@ -1,902 +1,972 @@
-<!-- content starts here-->
-<div id="content" class="onboarding-content">
-  <div class="container-fluid">
-    <div id="step1" class="onboarding step-1 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">Welcome to Peerbuds</h1>
-          <!--<span style="float:right;"><a href="#" (click)="authenticationService.logout()">Logout</a></span>-->
-          <!--[routerLink]="['/login']"-->
-          <div class="step">STEP 1 OF 9</div>
-          <div class="stepHeader">Tell us a little about yourself</div>
-          <div class="upload-image-section">
-            <div class="profile-photo">
-              <img src="http://lorempixel.com/164/164/people/9" class="" alt="Profile Photo" title="Scott Medina" width="164">
-            </div>
-            <a href="#" class="btn btn-default btn-lg">Upload Image</a>
+<!-- <div style="margin:10px;">
+  <h1 x-large class="sample-content">Welcome to Peerbuds</h1>
+    <span style="float:right;"><a href="#" (click)="authenticationService.logout()">Logout</a></span>
+    <div class="step">STEP 1 OF 10</div>
+    <div class="stepHeader">Tell us a litle about yourself</div>
+
+      <image-upload></image-upload>
+      <div class="upload-image-section imageHolder">
+        <div class="profile-photo image">
+          <div class="x-mark hide">
+              <span class="close"></span>
           </div>
-          <form>
-            <div class="row">
-              <div class="col-sm-6 margin-bottom-30">
-                <div class="form-group">
-                  <label class="display-block">First Name</label>
-                  <input type="text" class="form-control" />
-                </div>
-                <div class="form-group">
-                  <label class="display-block">Last Name</label>
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="form-group">
-                  <div class="stepHeader">What languages do you speak?</div>
-                  <input type="text" class="form-control" placeholder="Search for languages" />
-                </div>
-              </div>
-              <div class="col-sm-6 margin-bottom-30">
-                <div class="form-group">
-                  <div class="stepHeader">Where are you from?</div>
-                  <select class="form-control">
-                    <option value="">Search for a country</option>
-                    <option value="US">USA</option>
-                    <option value="AU">AUS</option>
-                    <option value="IN">INDIA</option>
-                    <option value="CH">CHINA</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(2)">Next</button>
-          </form>
         </div>
-        <!-- onboarding ends here-->
+        <div><button type="button" class="btn btn-default btn-lg btnUpload" (click)="upload()" >Upload Image</button></div>
       </div>
-    </div>
-    <!-- step 1 ends here -->
-    <div id="step2" class="onboarding step-2 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">We're glad you want to teach</h1>
-          <div class="step">STEP 2 OF 9</div>
-          <form>
-            <div class="row">
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="form-group">
-                  <label class="display-block">Create your headline</label>
-                  <input type="text" class="form-control" />
+</div> -->
+
+<div class="position-relative">
+<!--class="position-relative"-->
+  <!-- content starts here-->
+  <div id="content" class="onboarding-content">
+    <div class="container-fluid">
+      <div class="onboarding step-1" [hidden]="step!=1">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Welcome to Peerbuds</h1>
+            <!--[routerLink]="['/login']"-->
+            <div class="step">STEP 1 OF 9</div>
+            <div class="stepHeader">Tell us a little about yourself</div>
+            <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)" novalidate>
+            <!-- <div class="upload-image-section">
+              <div class="profile-photo">
+                <img src="http://lorempixel.com/164/164/people/9" class="" alt="Profile Photo" title="Scott Medina" width="164">
+              </div>
+              <a href="#" class="btn btn-default btn-lg">Upload Image</a>
+            </div> -->
+            <div class="upload-image-section imageHolder">
+              <!-- <div class="profile-photo image">
+                <div class="x-mark hide">
+                    <span class="close"></span>
                 </div>
               </div>
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="form-group">
-                  <label class="display-block">Give us a short descrip@on about yourself</label>
-                  <textarea class="form-control" maxlength="5000"></textarea>
-                  <span class="text-right text-grey display-block margin-top-5">max. 5000 chars</span>
-                </div>
-              </div>
+              <div>
+                <label class="btn btn-default btn-lg btnUpload" for="my-file-selector">
+                    <input type="file" style="display:none;" (change)="readUrl($event)" />
+                    Upload Image
+                </label>
+              </div> -->
+              <!--<image-container></image-container>-->
+              <image-upload [max]="1"
+                [buttonCaption]="'Upload Image'"
+                [dropBoxMessage]="''"
+                (onFileUploadFinish)="imageUploaded($event)"
+                ></image-upload>
+
+                <!-- <input #fileInput type="file" (change)="upload()" > -->
             </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(3)">Next</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- step 2 ends here -->
-    <div id="step3" class="onboarding step-3 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 3 OF 9</div>
-          <div class="stepHeader">Tell us what you are looking for</div>
-          <form>
-            <div class="row">
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="lookingFor">
-                      <label class="check">
-                            <input type="checkbox" id="chk-01">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                        <i class="personal"></i>
-                      </div>
-                      <span class="lookingForTitle">Personal</span>
-                    </div>
+
+              <div class="row">
+                <div class="col-sm-6 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">First Name</label>
+                    <input type="text" class="form-control" formControlName="first_name"/>
                   </div>
-                  <div class="col-sm-4">
-                    <div class="lookingFor">
-                      <label class="check">
-                            <input type="checkbox" id="chk-02">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                        <i class="professional"></i>
-                      </div>
-                      <span class="lookingForTitle">Professional</span>
-                    </div>
+                  <div class="form-group">
+                    <label class="display-block">Last Name</label>
+                    <input type="text" class="form-control" formControlName="last_name" />
                   </div>
-                  <div class="col-sm-4 ">
-                    <div class="lookingFor">
-                      <label class="check">
-                            <input type="checkbox" id="chk-03">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                        <i class="intellectual"></i>
-                      </div>
-                      <span class="lookingForTitle">Intellectual</span>
-                    </div>
+                </div>
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <div class="stepHeader">What languages do you speak?</div>
+                    <input type="text" class="form-control" placeholder="Mention the Languages" formControlName="languages"/>
+                    <!--<p-autoComplete [(ngModel)]="languages" [suggestions]="results" (completeMethod)="search($event)" [multiple]="true" [ngModelOptions]="{standalone: true}"></p-autoComplete>-->
+                  </div>
+                </div>
+                <div class="col-sm-6 margin-bottom-30">
+                  <div class="form-group">
+                    <div class="stepHeader">Where are you from?</div>
+                    <select class="form-control" formControlName="location">
+                      <option [value]="">--Select--</option>
+                      <option *ngFor="let c of countries" [value]="c.cca2">{{c.name.common}} ({{c.cca2}}) </option>
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(4)">Next</button>
-          </form>
+              <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+            </form>
+          </div>
+          <!-- onboarding ends here-->
         </div>
       </div>
-    </div>
-    <!-- step 3 ends here -->
-    <div id="step4" class="onboarding step-4 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 4 OF 9</div>
-          <div class="stepHeader">What type of learner are you?</div>
-          <form>
-            <div class="row">
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <div class="lookingFor learner">
-                      <label class="check">
+      <!-- step 1 ends here -->
+      <div class="onboarding step-2" [hidden]="step!=2">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">We're glad you want to teach</h1>
+            <div class="step">STEP 2 OF 9</div>
+            <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)">
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">Create your headline</label>
+                    <input type="text" class="form-control" formControlName="headline"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="form-group">
+                    <label class="display-block">Give us a short description about yourself</label>
+                    <textarea class="form-control" maxlength="5000" formControlName="description"></textarea>
+                    <span class="text-right text-grey display-block margin-top-5">max. 5000 chars</span>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 2 ends here -->
+      <div class="onboarding step-3" [hidden]="step!=3">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 3 OF 9</div>
+            <div class="stepHeader">Tell us what you are looking for</div>
+            <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)">
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="lookingFor">
+                        <label class="radiobox">
+                            <input type="radio" formControlName="experience_type" value="Personal">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="personal"></i>
+                        </div>
+                        <span class="lookingForTitle">Personal</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="lookingFor">
+                        <label class="radiobox">
+                            <input type="radio" formControlName="experience_type" value="Professional">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="professional"></i>
+                        </div>
+                        <span class="lookingForTitle">Professional</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                      <div class="lookingFor">
+                        <label class="radiobox">
+                            <input type="radio" formControlName="experience_type" value="Intellectual">
+                            <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="intellectual"></i>
+                        </div>
+                        <span class="lookingForTitle">Intellectual</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default ">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 3 ends here -->
+      <div class="onboarding step-4" [hidden]="step!=4">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 4 OF 9</div>
+            <div class="stepHeader">What type of learner are you?</div>
+            <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)">
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+
+                    <div class="col-sm-3" *ngFor="let type of learner_type_array.learner_type">
+                        <div class="lookingFor">
+                          <label class="check">
+                            <input type="checkbox"
+                                    [checked]="profile._value['learner_type'].includes(type)"
+                                    (change)="changeLearnerType(type)">
+                                    <i></i>
+                          </label>
+                        <div class="lookingFor-thumb learner">
+                          <i class="type.id"></i>
+                        </div>
+                        <span class="lookingForTitle">{{ type.display }}</span>
+                        <p class="lookingForDesc">You learn well when aided by music, sound, rhyme, rhythm, speaking or listening</p>
+                      </div>
+                    </div>
+
+                    <!--<div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
                             <input type="checkbox" id="chk-04">
                             <i></i>
                           </label>
-                      <div class="lookingFor-thumb">
-                        <i class="auditory"></i>
+                        <div class="lookingFor-thumb learner">
+                          <i class="auditory"></i>
+                        </div>
+                        <span class="lookingForTitle">Auditory</span>
+                        <p class="lookingForDesc">You learn well when aided by music, sound, rhyme, rhythm, speaking or listening</p>
                       </div>
-                      <span class="lookingForTitle">Auditory</span>
-                      <p class="lookingForDesc">You learn well when aided by music, sound, rhyme, rhythm, speaking or listening</p>
                     </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="lookingFor learner">
-                      <label class="check">
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
                             <input type="checkbox" id="chk-05">
                             <i></i>
                           </label>
-                      <div class="lookingFor-thumb">
-                        <i class="fa fa-eye"></i>
+                        <div class="lookingFor-thumb learner">
+                          <i class="fa fa-eye"></i>
+                        </div>
+                        <span class="lookingForTitle">Visual</span>
+                        <p class="lookingForDesc">You learn well when aided by images, pictures, and spaHal organizaHon of elements</p>
                       </div>
-                      <span class="lookingForTitle">Visual</span>
-                      <p class="lookingForDesc">You learn well when aided by images, pictures, and spaHal organizaHon of elements</p>
                     </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="lookingFor learner">
-                      <label class="check">
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
                             <input type="checkbox" id="chk-06">
                             <i></i>
                           </label>
-                      <div class="lookingFor-thumb">
-                        <i class="read-write"></i>
+                        <div class="lookingFor-thumb learner">
+                          <i class="read-write"></i>
+                        </div>
+                        <span class="lookingForTitle">Read &amp; Write</span>
+                        <p class="lookingForDesc">You learn well by reading or wriHng the material you want to learn</p>
                       </div>
-                      <span class="lookingForTitle">Read &amp; Write</span>
-                      <p class="lookingForDesc">You learn well by reading or wriHng the material you want to learn</p>
                     </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="lookingFor learner">
-                      <label class="check">
+                    <div class="col-sm-3">
+                      <div class="lookingFor">
+                        <label class="check">
                             <input type="checkbox" id="chk-07">
                             <i></i>
                           </label>
-                      <div class="lookingFor-thumb">
-                        <i class="kinesthetic"></i>
+                        <div class="lookingFor-thumb learner">
+                          <i class="kinesthetic"></i>
+                        </div>
+                        <span class="lookingForTitle">Kinesthetic</span>
+                        <p class="lookingForDesc">You learn well when you can move your body, and/or use your hands and sense of touch</p>
                       </div>
-                      <span class="lookingForTitle">Kinesthetic</span>
-                      <p class="lookingForDesc">You learn well when you can move your body, and/or use your hands and sense of touch</p>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(5)">Next</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- step 4 ends here -->
-    <div id="step5" class="onboarding step-5 hide">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 5 OF 9</div>
-          <div class="stepHeader">What are your interests? <span class="text-grey">Choose any three to continue</span></div>
-          <form>
-            <div class="row">
-              <div class="col-sm-12 margin-bottom-30">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Search for a topic or enter a new one" />
-                  </div>
-                  <div class="col-sm-12 margin-top-30">
-                    <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-08">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Academic Topic</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-09">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Artificial Intelligence</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-10">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Business</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-11">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">CAD</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-15">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">CAD</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-12">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Academic Topic</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-13">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Artificial Intelligence</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-14">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">Business</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-15">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">CAD</span>
-                    </div>
-                  </div>
-                  <div class="col-md-5ths col-xs-6">
-                    <div class="lookingFor interest">
-                      <label class="check">
-                            <input type="checkbox" id="chk-15">
-                            <i></i>
-                          </label>
-                      <div class="lookingFor-thumb">
-                      </div>
-                      <span class="lookingForTitle">CAD</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(6)">Next</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- step 5 ends here -->
-    <div id="step6" class="onboarding step-6 hide">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 6 OF 9</div>
-          <div class="stepHeader">We've found some communities for you <span class="text-grey">Choose any three to continue</span></div>
-          <div class="row">
-            <div class="col-md-5ths col-xs-6">
-              <div class="lookingFor communities">
-                <label class="check">
-                    <input type="checkbox" id="chk-08">
-                    <i></i>
-                  </label>
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="fromDetail margin-top-10">
-                  <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">560</span>
-                    <span>Videography</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5ths col-xs-6">
-              <div class="lookingFor interest">
-                <label class="check">
-                            <input type="checkbox" id="chk-09">
-                            <i></i>
-                          </label>
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="fromDetail margin-top-10">
-                  <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">560</span>
-                    <span>Videography</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5ths col-xs-6">
-              <div class="lookingFor interest">
-                <label class="check">
-                            <input type="checkbox" id="chk-11">
-                            <i></i>
-                          </label>
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="fromDetail margin-top-10">
-                  <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">560</span>
-                    <span>Videography</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5ths col-xs-6">
-              <div class="lookingFor interest">
-                <label class="check">
-                            <input type="checkbox" id="chk-12">
-                            <i></i>
-                          </label>
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="fromDetail margin-top-10">
-                  <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">560</span>
-                    <span>Videography</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5ths col-xs-6">
-              <div class="lookingFor interest">
-                <label class="check">
-                            <input type="checkbox" id="chk-13">
-                            <i></i>
-                          </label>
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="fromDetail margin-top-10">
-                  <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">560</span>
-                    <span>Videography</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <button class="onboarding-btn btn btn-lg btn-default ">Next</button>
+            </form>
           </div>
-          <div class="stepHeader margin-top-30">Here are some projects you might be interested in</div>
-          <div class="row seven-cols">
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Character Animation</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Walking Sequence for Cats</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Concept Sketches for Worlds</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/3.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/4.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/5.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/6.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="lookingFor communities">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/7.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
-                        title="Louise De Masi"> Louise De Masi
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userSees">387</span>
-                    <span class="userLikes">124</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="stepHeader margin-top-30">Take a look at these courses in your areas of interest</div>
-          <div class="row margin-bottom-30">
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">DIY Cinematography: Make Your Video Look Like a Movie ($40)</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Ryan Booth"
-                        title="Ryan Booth">Ryan Booth
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">34,980</span>
-                    <span class="userLikes">124</span>
-                    <span>8 hours</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Low Budget Filmmaking — Tips and Tricks for an Indie Look ($40)</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Matty Brown"
-                        title="Matty Brown">Matty Brown
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">288</span>
-                    <span class="userLikes">124</span>
-                    <span>27 hours</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Video Produc5on - The Complete Course ($40)</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/3.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Phil Ebiner"
-                        title="Phil Ebiner">Phil Ebiner
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">34</span>
-                    <span class="userLikes">124</span>
-                    <span>45 hours</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Video Produc5on - The Complete Course ($40)</div>
-                <div class="position-relative">
-                  <span class="title-18 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/4.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Phil Ebiner"
-                        title="Phil Ebiner">Phil Ebiner
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span class="userCount">34</span>
-                    <span class="userLikes">124</span>
-                    <span>45 hours</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="stepHeader margin-top-30">Here are some upcoming courses based on your interest 'Photography'</div>
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
-                        title="Leah Carlston">Leah Carlston
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span>$40</span>
-                    <span class="userCount">56</span>
-                  </div>
-                  <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
-                        title="Leah Carlston">Leah Carlston
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span>$40</span>
-                    <span class="userCount">56</span>
-                  </div>
-                  <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
-                        title="Leah Carlston">Leah Carlston
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span>$40</span>
-                    <span class="userCount">56</span>
-                  </div>
-                  <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="lookingFor">
-                <div class="lookingFor-thumb">
-                </div>
-                <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
-                <div class="position-relative">
-                  <span class="title-14 dot-dot">
-                        <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
-                        title="Leah Carlston">Leah Carlston
-                      </span>
-                  <div class="fromSocialCountBox">
-                    <span>$40</span>
-                    <span class="userCount">56</span>
-                  </div>
-                  <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="onboarding-btn btn btn-lg btn-default margin-top-50" (click)="GoToNext(7)">Next</button>
         </div>
       </div>
-    </div>
-    <!-- step 6 ends here -->
-    <div id="step7" class="onboarding step-7 hide">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 7 OF 9</div>
-          <div class="stepHeader">Here's some people you may want to follow. <span class="text-grey">Choose any three to continue</span></div>
-          <form>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(1)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/1.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(2)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/2.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(3)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/3.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(4)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/4.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(5)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/5.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(6)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/6.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(7)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/7.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="follow-people">
-                  <label class="radiobox">
-                      <input type="checkbox" name="fp-radio[]" (change)="checkChanged(8)">
-                      <i></i>
-                    </label>
-                  <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/8.jpg" alt="Doris Rodriguez" />
-                  <div class="fp-name">
-                    Doris Rodriguez
-                    <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(8)">Next</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- step 7 ends here -->
-    <div id="step8" class="onboarding step-8 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 8 OF 9</div>
-          <div class="stepHeader">Do you have a portfolio or a website? If yes, enter the URL</div>
-          <form>
-            <div class="form-group margin-bottom-30">
-              <label class="display-block text-grey margin-bottom-10">This could be your page on Dribble/Behance/Github/any website where you showcase your work</label>
-              <input type="text" class="form-control" />
-            </div>
-            <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(9)">Next</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- step 8 ends here -->
-    <div id="step9" class="onboarding step-9 hide">
-      <div class="row">
-        <div class="col-sm-7">
-          <h1 class="title">Help us create the best experience for you</h1>
-          <div class="step">STEP 9 OF 9</div>
-          <div class="stepHeader">Connect to social media</div>
-          <div class="social-media-box margin-bottom-30 clearfix">
-            <div class="social-icon facebook"><i class="fa fa-facebook"></i></div>
-            <div class="social-icon google"><i class="fa fa-google"></i></div>
-            <div class="social-icon linkedin"><i class="fa fa-linkedin"></i></div>
-            <div class="social-icon instagram"></div>
-            <div class="social-icon twitter"><i class="fa fa-twitter"></i></div>
-            <div class="social-icon snapchat"><i class="fa fa-snapchat-ghost"></i></div>
-          </div>
-          <button class="btn-connect-start btn btn-lg btn-primary" (click)="startExploring(); GoToNext(10)">Start Exploring!</button>
-          <button class="btn-connect-invite btn btn-lg btn-default">Invite people to join Peerbuds</button>
-        </div>
-      </div>
-    </div>
-    <!-- step 9 ends here -->
-    <div id="step10" class="onboarding invite-people-to-join">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="title">Invite people to join Peerbuds</h1>
-          <div class="stepHeader">Invite people from your connected accounts or by email</div>
-          <div class="clearfix margin-bottom-20">
-            <span class="text-grey pull-left lh-38">Import contacts from</span>
-            <div class="social-icon-invite"><span class="icon-facebook"><i class="fa fa-facebook"></i></span> Facebook</div>
-            <div class="social-icon-invite"><span class="icon-google"><i class="fa fa-google"></i></span> Google</div>
-          </div>
-          <form>
-            <input type="text" class="form-control margin-bottom-20" placeholder="Search by name or enter email address " />
-            <button class="btn btn-lg btn-default">Send Invites</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- invite people ends here -->
-  </div>
-</div>
-<!-- content ends here-->
+      <!-- step 4 ends here  -->
+      <div class="onboarding step-5" [hidden]="step!=5">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 5 OF 9</div>
+            <div class="stepHeader">What are your interests? <span class="text-grey">Choose any three to continue</span></div>
+            <form [formGroup]="interest1" (ngSubmit)="submitInterests(interest1)">
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" placeholder="Search for a topic or enter a new one" />
+                    </div>
+                    <div class="col-sm-12 margin-top-30">
+                      <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
+                    </div>
+                    <div class="col-sm-3" *ngFor="let topic of suggested_topics">
+                        <div class="lookingFor interest">
+                          <label class="check">
+                            <input type="checkbox"
+                                    (change)="changeInterests(topic)">
+                                    <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="topic.id"></i>
+                        </div>
+                        <span class="lookingForTitle">{{ topic.name }} - {{topic.type}}</span>
+                      </div>
+                    </div>
 
-<footer class="onboarding-footer " *ngIf="startExploringSection =='false'">
-  <div class="container-fluid ">
-    <div class="pull-left ">
-      <span class="label-completed ">0% Completed</span>
-      <div class="progressBar ">
-        <span class="progressBarSpan" [style.width.%]="progressBarSpan"></span>
+                    <!-- <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-08">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Academic Topic</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-09">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Artificial Intelligence</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-10">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Business</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-11">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-12">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Academic Topic</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-13">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Artificial Intelligence</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-14">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Business</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default">Next</button>
+            </form>
+          </div>
+        </div>
       </div>
+      <!-- step 5 ends here -->
+      <div class="onboarding step-6" [hidden]="step!=6">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 6 OF 9</div>
+            <div class="stepHeader">We've found some communities for you <span class="text-grey">Choose any three to continue</span></div>
+            <div class="row">
+              <div class="col-md-5ths col-xs-6">
+                <div class="lookingFor communities">
+                  <label class="check">
+                      <input type="checkbox" id="chk-08">
+                      <i></i>
+                    </label>
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="fromDetail margin-top-10">
+                    <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">560</span>
+                      <span>Videography</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5ths col-xs-6">
+                <div class="lookingFor interest">
+                  <label class="check">
+                              <input type="checkbox" id="chk-09">
+                              <i></i>
+                            </label>
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="fromDetail margin-top-10">
+                    <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">560</span>
+                      <span>Videography</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5ths col-xs-6">
+                <div class="lookingFor interest">
+                  <label class="check">
+                              <input type="checkbox" id="chk-11">
+                              <i></i>
+                            </label>
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="fromDetail margin-top-10">
+                    <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">560</span>
+                      <span>Videography</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5ths col-xs-6">
+                <div class="lookingFor interest">
+                  <label class="check">
+                              <input type="checkbox" id="chk-12">
+                              <i></i>
+                            </label>
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="fromDetail margin-top-10">
+                    <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">560</span>
+                      <span>Videography</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5ths col-xs-6">
+                <div class="lookingFor interest">
+                  <label class="check">
+                              <input type="checkbox" id="chk-13">
+                              <i></i>
+                            </label>
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="fromDetail margin-top-10">
+                    <span class="fs-18 fw-bold display-block">Film Making Enthusiasts</span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">560</span>
+                      <span>Videography</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stepHeader margin-top-30">Here are some projects you might be interested in</div>
+            <div class="row seven-cols">
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Character Animation</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Walking Sequence for Cats</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Concept Sketches for Worlds</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/3.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/4.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/5.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/6.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="lookingFor communities">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10">Small Worlds</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/7.jpg" class="thumb-circle thumb-28" alt="Louise De Masi"
+                          title="Louise De Masi"> Louise De Masi
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userSees">387</span>
+                      <span class="userLikes">124</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stepHeader margin-top-30">Take a look at these courses in your areas of interest</div>
+            <div class="row margin-bottom-30">
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">DIY Cinematography: Make Your Video Look Like a Movie ($40)</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Ryan Booth"
+                          title="Ryan Booth">Ryan Booth
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">34,980</span>
+                      <span class="userLikes">124</span>
+                      <span>8 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Low Budget Filmmaking — Tips and Tricks for an Indie Look ($40)</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Matty Brown"
+                          title="Matty Brown">Matty Brown
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">288</span>
+                      <span class="userLikes">124</span>
+                      <span>27 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Video Produc5on - The Complete Course ($40)</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/3.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Phil Ebiner"
+                          title="Phil Ebiner">Phil Ebiner
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">34</span>
+                      <span class="userLikes">124</span>
+                      <span>45 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Video Produc5on - The Complete Course ($40)</div>
+                  <div class="position-relative">
+                    <span class="title-18 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/4.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Phil Ebiner"
+                          title="Phil Ebiner">Phil Ebiner
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span class="userCount">34</span>
+                      <span class="userLikes">124</span>
+                      <span>45 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stepHeader margin-top-30">Here are some upcoming courses based on your interest 'Photography'</div>
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/1.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
+                          title="Leah Carlston">Leah Carlston
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span>$40</span>
+                      <span class="userCount">56</span>
+                    </div>
+                    <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
+                          title="Leah Carlston">Leah Carlston
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span>$40</span>
+                      <span class="userCount">56</span>
+                    </div>
+                    <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
+                          title="Leah Carlston">Leah Carlston
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span>$40</span>
+                      <span class="userCount">56</span>
+                    </div>
+                    <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="lookingFor">
+                  <div class="lookingFor-thumb">
+                  </div>
+                  <div class="title-18 margin-top-10 margin-bottom-10 lh-28">Using the Nikon Autofocus System</div>
+                  <div class="position-relative">
+                    <span class="title-14 dot-dot">
+                          <img src="https://uinames.com/api/photos/male/2.jpg" class="thumb-circle thumb-28 margin-right-10" alt="Leah Carlston"
+                          title="Leah Carlston">Leah Carlston
+                        </span>
+                    <div class="fromSocialCountBox">
+                      <span>$40</span>
+                      <span class="userCount">56</span>
+                    </div>
+                    <div>Apr 18 - May 9,2017 <span class="text-grey">(5 Session)</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="onboarding-btn btn btn-lg btn-default margin-top-50" (click)="GoToNext(7)">Next</button>
+          </div>
+        </div>
+      </div>
+      <!-- step 6 ends here -->
+      <div class="onboarding step-7" [hidden]="step!=7">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 7 OF 9</div>
+            <div class="stepHeader">Here's some people you may want to follow. <span class="text-grey">Choose any three to continue</span></div>
+            <form>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(1)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/1.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(2)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/2.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(3)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/3.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(4)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/4.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(5)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/5.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(6)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/6.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(7)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/7.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="follow-people">
+                    <label class="radiobox">
+                        <input type="checkbox" name="fp-radio[]" (change)="checkChanged(8)">
+                        <i></i>
+                      </label>
+                    <img class="fp-thumb thumb-circle thumb-80" src="https://uinames.com/api/photos/male/8.jpg" alt="Doris Rodriguez" />
+                    <div class="fp-name">
+                      Doris Rodriguez
+                      <span class="fp-designation dot-dot">Chief Architect @ SWR</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(8)">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 7 ends here -->
+      <div class="onboarding step-8" [hidden]="step!=8">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 8 OF 9</div>
+            <div class="stepHeader">Do you have a portfolio or a website? If yes, enter the URL</div>
+            <form>
+              <div class="form-group margin-bottom-30">
+                <label class="display-block text-grey margin-bottom-10">This could be your page on Dribble/Behance/Github/any website where you showcase your work</label>
+                <input type="text" class="form-control" />
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default" (click)="GoToNext(9)">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- step 8 ends here -->
+      <div class="onboarding step-9" [hidden]="step!=9">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 9 OF 9</div>
+            <div class="stepHeader">Connect to social media</div>
+            <div class="social-media-box margin-bottom-30 clearfix">
+              <div class="social-icon facebook"><i class="fa fa-facebook"></i></div>
+              <div class="social-icon google"><i class="fa fa-google"></i></div>
+              <div class="social-icon linkedin"><i class="fa fa-linkedin"></i></div>
+              <div class="social-icon instagram"></div>
+              <div class="social-icon twitter"><i class="fa fa-twitter"></i></div>
+              <div class="social-icon snapchat"><i class="fa fa-snapchat-ghost"></i></div>
+            </div>
+            <button class="btn-connect-start btn btn-lg btn-primary" (click)="startExploring(); GoToNext(10)">Start Exploring!</button>
+            <button class="btn-connect-invite btn btn-lg btn-default">Invite people to join Peerbuds</button>
+          </div>
+        </div>
+      </div>
+      <!-- step 9 ends here -->
+      <div class="onboarding step-10 invite-people-to-join" [hidden]="step!=10">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="title">Invite people to join Peerbuds</h1>
+            <div class="stepHeader">Invite people from your connected accounts or by email</div>
+            <div class="clearfix margin-bottom-20">
+              <span class="text-grey pull-left lh-38">Import contacts from</span>
+              <div class="social-icon-invite"><span class="icon-facebook"><i class="fa fa-facebook"></i></span> Facebook</div>
+              <div class="social-icon-invite"><span class="icon-google"><i class="fa fa-google"></i></span> Google</div>
+            </div>
+            <form>
+              <input type="text" class="form-control margin-bottom-20" placeholder="Search by name or enter email address " />
+              <button class="btn btn-lg btn-default">Send Invites</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- invite people ends here -->
     </div>
-    <a class="onboarding-footer-btn btn btn-lg btn-default "><i class="fa fa-chevron-right "></i></a>
   </div>
-</footer>
+  <!-- content ends here-->
+
+  <!-- <div class="onboarding-footer ">
+    <div class="container-fluid ">
+      <div class="pull-left ">
+        <span class="label-completed ">0% Completed</span>
+        <div class="progressBar ">
+          <span style="width:11%; "></span>
+        </div>
+      </div>
+      <a class="onboarding-footer-btn btn btn-lg btn-default "><i class="fa fa-chevron-right "></i></a>
+    </div>
+  </div> -->
+</div>
