@@ -70,9 +70,9 @@
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="form-group">
                     <div class="stepHeader">What languages do you speak?</div>
-                    <input type="text" class="form-control" placeholder="Mention the Languages" formControlName="languages"/>
-                    <!--<p-autoComplete [(ngModel)]="languages" [suggestions]="results" (completeMethod)="search($event)" [multiple]="true" [ngModelOptions]="{standalone: true}"></p-autoComplete>-->
-                  </div>
+                    <!--<input type="text" class="form-control" placeholder="Mention the Languages" formControlName="languages"/>-->
+                    <multiselect-autocomplete [list]="languagesArray" (selectedOutput)="selected($event)" [placeholder]=""></multiselect-autocomplete>
+                    </div>
                 </div>
                 <div class="col-sm-6 margin-bottom-30">
                   <div class="form-group">
@@ -184,7 +184,7 @@
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="row">
 
-                    <div class="col-sm-3" *ngFor="let type of learner_type_array.learner_type">
+                    <div class="col-sm-3" *ngFor="let type of learnerType_array.learner_type">
                         <div class="lookingFor">
                           <label class="check">
                             <input type="checkbox"
@@ -271,13 +271,16 @@
               <div class="row">
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="row">
-                    <div class="col-sm-10">
+                    <!--<div class="col-sm-10">
                       <input type="text" class="form-control" placeholder="Search for a topic or enter a new one" />
+                    </div>-->
+                    <div class="col-sm-10">
+                      <multiselect-autocomplete [list]="suggestedTopics" (selectedOutput)="selected($event)" [placeholder]="placeholderStringTopic"></multiselect-autocomplete>
                     </div>
                     <div class="col-sm-12 margin-top-30">
                       <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
                     </div>
-                    <div class="col-sm-3" *ngFor="let topic of suggested_topics">
+                    <div class="col-sm-3" *ngFor="let topic of suggestedTopics">
                         <div class="lookingFor interest">
                           <label class="check">
                             <input type="checkbox"

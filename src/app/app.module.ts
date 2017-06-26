@@ -31,7 +31,10 @@ import { AppState, InternalStateType } from './app.service';
 import { AppConfig } from './app.config';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, CountryPickerService, LanguagePickerService } from './_services/index';
+import { AlertService
+        , AuthenticationService
+        , CountryPickerService
+        , LanguagePickerService } from './_services/index';
 
 import { LoginComponent } from './login/index';
 import { HomeComponent } from './home/index';
@@ -40,7 +43,7 @@ import { AboutComponent } from './about/index';
 import { RegisterComponent } from './register/index';
 import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
-
+import { MultiselectAutocompleteModule } from './utilityComponent/multiselect-autocomplete/module';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -57,7 +60,7 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
-/*let providers = {
+/* let providers = {
     "google": {
       "clientId": "GOOGLE_CLIENT_ID"
     },
@@ -96,7 +99,8 @@ type StoreType = {
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    ImageUploadModule.forRoot()
+    ImageUploadModule.forRoot(),
+    MultiselectAutocompleteModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -156,4 +160,4 @@ export class AppModule {
 
 }
 
-//Angular2SocialLoginModule.loadProvidersScripts(providers);
+// Angular2SocialLoginModule.loadProvidersScripts(providers);

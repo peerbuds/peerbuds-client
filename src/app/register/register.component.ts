@@ -25,18 +25,22 @@ export class RegisterComponent {
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/onboarding';
     }
 
-    register() {
+    public register() {
         this.loading = true;
-        debugger;
-        this.authenticationService.register(this.model.username, this.model.password, this.model.email)
+        this.authenticationService.register(this.model.username
+            , this.model.password, this.model.email, this.returnUrl)
             .subscribe(
-                data => {
+                (data) => {
                     console.log(this.returnUrl);
-                    this.router.navigate([this.returnUrl]);
+                    //this.router.navigate([this.returnUrl]);
                 },
-                error => {
+                (error) => {
                     this.alertService.error(error._body);
                     this.loading = false;
                 });
+    }
+
+    public submit() {
+      form.submit();
     }
 }

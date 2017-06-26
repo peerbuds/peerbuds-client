@@ -8,11 +8,11 @@ import { AlertService } from '../_services/index';
 })
 
 export class AlertComponent {
-    message: any;
+    private message: any;
 
     constructor(private alertService: AlertService) { }
 
-    ngOnInit() {
-        this.alertService.getMessage().subscribe(message => { this.message = message; });
+    public ngOnInit() {
+        this.alertService.getMessage().subscribe((message) => { this.message = message; });
     }
 }

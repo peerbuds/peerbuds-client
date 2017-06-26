@@ -6,7 +6,6 @@ import { AuthenticationService } from '../_services/index';
 import { AppState } from '../app.service';
 import { XLargeDirective } from './x-large';
 
-
 @Component({
   // The selector is what angular internally uses
   // for `document.querySelectorAll(selector)` in our index.html
@@ -19,21 +18,21 @@ import { XLargeDirective } from './x-large';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './home.component.html'
 })
+
 export class HomeComponent implements OnInit {
   // Set our default values
   public localState = { value: '' };
-
+  public loggedIn = false;
 
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
     public authenticationService: AuthenticationService
     ) {
+      this.loggedIn = this.authenticationService.isLoggedIn();
     }
 
   public ngOnInit() {
-    //this.loadAllUsers();
   }
-
 
 }

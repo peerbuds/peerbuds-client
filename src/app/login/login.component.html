@@ -19,10 +19,12 @@
         <div>
             <hr>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary" (click)="signup('facebook')">Login with Facebook</button>
+              <!--<button type="submit" class="btn btn-primary" (click)="signup('facebook')">Login with Facebook</button>
               <button type="submit" class="btn btn-primary" (click)="signup('google')">Login with Google</button>
               <button type="submit" class="btn btn-primary" (click)="signup('twitter')">Login with Twitter</button>
-              <button type="submit" class="btn btn-primary" (click)="signup('linkedin')">Login with LinkedIn</button>
+              <button type="submit" class="btn btn-primary" (click)="signup('linkedin')">Login with LinkedIn</button>-->
+              <a href="http://localhost:3000/auth/facebook?returnTo=%23/onboarding" class="btn btn-primary">Login with Facebook</a>
+              <a href="http://localhost:3000/auth/google?returnTo=%23/onboarding" class="btn btn-primary">Login with Google</a>
             </div>
         </div>
       </form>

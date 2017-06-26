@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   public model: any = {};
   public loading = false;
   public returnUrl: string;
+  public loggedIn = false;
   // TypeScript public modifiers
 
   constructor(
@@ -26,40 +27,36 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
     public authenticationService: AuthenticationService,
-    private alertService: AlertService) {
-    }
+    private alertService: AlertService) {}
 
   public ngOnInit() {
-    // reset login status
-    //this.authenticationService.logout();
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  private redirect() {
-    this.router.navigate([ this.returnUrl ]); //use the stored url here
-  }
-
-  login() {
+  public login() {
       this.loading = true;
+      this.loggedIn = this.authenticationService.isLoggedIn();
       this.authenticationService.login(this.model.username, this.model.password)
           .subscribe(
-              data => {
+              (data) => {
                   this.router.navigate([this.returnUrl]);
               },
-              error => {
+              (error) => {
                   this.alertService.error(error._body);
                   this.loading = false;
               });
   }
 
-  signup(provider){
+  public signup(provider) {
     this.authenticationService.signup(provider).subscribe(
       (data) => {
-//        this.user=data;
       }
     );
   }
 
+  private redirect() {
+    this.router.navigate([ this.returnUrl ]); // use the stored url here
+  }
 
 }
