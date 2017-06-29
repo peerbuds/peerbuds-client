@@ -39,6 +39,7 @@ import { AlertService
 import { LoginComponent } from './login/index';
 import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
+import { WorkshopComponent } from './workshop/index';
 import { AboutComponent } from './about/index';
 import { RegisterComponent } from './register/index';
 import { NoContentComponent } from './no-content/index';
@@ -89,6 +90,7 @@ type StoreType = {
     LoginComponent,
     HomeComponent,
     OnboardingComponent,
+    WorkshopComponent,
     RegisterComponent,
     NoContentComponent,
     XLargeDirective

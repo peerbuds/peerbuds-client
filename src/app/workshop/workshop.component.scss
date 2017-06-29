@@ -1,0 +1,86 @@
+/*styles for onboarding content only*/
+@import "./src/styles/utilities/config";
+
+#content{
+  padding-top:100px;
+}
+.step
+{
+  font-size: 20px;
+  color: #666;
+}
+
+.workshop-content{
+  margin-bottom:0!important;
+  padding-bottom:136px;
+}
+.workshop{
+  .title{
+    font-size:29px;
+    margin:0 0 52px 0;
+    color:$grey;//#666;
+  }
+  .step
+  {
+    color: #999;
+    margin-bottom:25px;
+  }
+  .stepHeader{
+    font-size:27px;
+    margin-bottom:20px;
+  }
+  .workshop-btn{
+    padding:20px 50px;
+    background-color: #3c3c3c;
+    color:#fff;
+    border-color:transparent;
+  }
+  textarea{
+    height:80px;
+    resize: none;
+  }
+}
+label.check > input, label.radiobox > input{display: none;}
+label.check, label.radiobox{
+  font-size: 14px;
+  font-weight: normal;
+  position:absolute;
+  top:5px;
+  right:25px;
+  z-index: 1;
+}
+label.check i, label.radiobox i {
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+    left: 0px;
+    top: 5px;
+    border-radius:5px;
+    border:1px solid #ccc;
+    font-style:normal;
+}
+label.radiobox i{border-radius:50%;}
+label.check [type=checkbox]:checked + i, label.radiobox input[type=radio]:checked+i{
+  background-color: #0091ea;
+  border:none;
+}
+label.radiobox [type=radio]:checked + i:before {top:3px; left:5px;}
+.btn-continue{
+  padding:10px 90px;
+}
+.progressBar{
+    margin-top:10px;
+    background-color: #e2e2e2;
+    width:410px;
+    height:8px;
+    position: relative;
+    span{
+      display:inline-block;
+      position: absolute;
+      height:100%;
+      transition:0.2s;
+      background-color:#9b9b9b;
+    }
+}
