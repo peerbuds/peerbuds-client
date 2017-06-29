@@ -3,17 +3,15 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import { AuthenticationService, CountryPickerService
-      , LanguagePickerService} from '../_services/index';
+import { AuthenticationService, CountryPickerService, LanguagePickerService} from '../_services/index';
 import { AppState } from '../app.service';
 import { XLargeDirective } from './x-large';
-import { Http, URLSearchParams, Headers, Response, BaseRequestOptions
-      , RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Http, URLSearchParams, Headers, Response, BaseRequestOptions, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { AppConfig } from '../app.config';
 import { CookieService } from 'angular2-cookie/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
-// import { Profile } from './interfaces/profile.interface';
+//import { Profile } from './interfaces/profile.interface';
 
 @Component({
   selector: 'onboarding',
@@ -28,26 +26,55 @@ export class OnboardingComponent implements OnInit {
   // Set our default values
   public localState = { value: '' };
   public countries: any[];
-  public languagesArray: any[];
-  public placeholderStringTopic = 'Search for a topic or enter a new one';
-  // public profile: Profile;
-  public userId: string;
+  public languages: any[];
+  //public profile: Profile;
+  public userId : string;
   public profile: FormGroup;
   public interest1: FormGroup;
 
   public key = 'access_token';
 
   public step = 1;
-  public learnerType_array =  {
+  public learner_type_array =  {
     learner_type: [{id: 'auditory', display: 'Auditory'}
                   , {id: 'visual', display: 'Visual'}
                   , {id: 'read-write', display: 'Read & Write'}
-                  , {id: 'kinesthetic', display: 'Kinesthetic'}]
+                  , {id: 'kinesthetic', display: 'Kinesthetic'}
   };
-  public selectedLanguages =  [];
 
-  public suggestedTopics = [];
+  public suggested_topics = [];
   public interests = [];
+
+  getCookieValue(key: string){
+    let cookieValue = this._cookieService.get(key).split(/[ \:.]+/);
+    this.userId = cookieValue[1]
+    return this.userId;
+  }
+
+  getProfile()
+  {
+
+    let reqObject = {
+                    "where" : {
+                                "userId" : this.getCookieValue('userId')
+                              }
+                    }
+    return this.http.get(this.config.apiUrl + '/api/profiles?filter=' + encodeURIComponent(JSON.stringify(reqObject)))
+    //return this.http.get(this.config.apiUrl + '/api/profiles?filter=%7B%22where%22%3A%7B%22userId%22%3A%2291c434e3-10fc-4f0e-afb5-ff1b90bdd841%22%7D%7D&access_token=a43affa6-5d03-4135-81f4-72229436b686')
+                .map((response: Response) => {
+                  console.log(response.json());
+                  this.profile.controls['id'].setValue(response.json()[0].id);
+                }).subscribe(data => console.log('response', data));
+  }
+
+  getTopics()
+  {
+    return this.http.get(this.config.searchUrl + '/api/search/topics')
+                    .map((response: Response) => {
+                      this.suggested_topics = response.json();
+                    }).subscribe(data => console.log('response', data));
+
+  }
 
   // TypeScript public modifiers
   constructor(
@@ -59,20 +86,13 @@ export class OnboardingComponent implements OnInit {
     private _cookieService: CookieService,
     private _fb: FormBuilder
     ) {
-        this.getCookieValue('userId');
-        this.countryPickerService.getCountries()
-            .subscribe((countries) => this.countries = countries);
-        this.languagePickerService.getLanguages()
-            .subscribe((languages) => this.languagesArray = languages);
-        console.log(typeof this.languagesArray);
-        // this.getProfile();
+        this.countryPickerService.getCountries().subscribe(countries => this.countries = countries);
+        this.languagePickerService.getLanguages().subscribe(languages => this.languages = languages);
+
+        this.getProfile();
         this.getTopics();
 
     }
-
-  public selected(event) {
-    this.selectedLanguages = event;
-  }
 
   public ngOnInit() {
 
@@ -84,9 +104,8 @@ export class OnboardingComponent implements OnInit {
       languages: new FormControl(''),
       location: new FormControl(''),
       experience_type: new FormControl(''),
-      // learner_type: new FormControl(''),
-      learner_type: new FormArray([]),
-      // this.learnerType_array.learner_type.map(type => new FormControl(type))
+      //learner_type: new FormControl(''),
+      learner_type: new FormArray([]), //this.learner_type_array.learner_type.map(type => new FormControl(type))
       portfolio_url: new FormControl(''),
       is_teacher: new FormControl('false'),
       description: new FormControl(''),
@@ -94,7 +113,7 @@ export class OnboardingComponent implements OnInit {
       work_experience: new FormControl(''),
       custom_url: new FormControl(''),
       profile_video: new FormControl(''),
-      // id: new FormControl(''),
+      id: new FormControl(''),
     });
 
     this.interest1 = new FormGroup({
@@ -103,10 +122,10 @@ export class OnboardingComponent implements OnInit {
 
   }
 
-  /* public readUrl(input) {
+  /*public readUrl(input) {
     console.log("Upload clicked");
     if (input.files && input.files[0]) {
-          let reader = new FileReader();
+          var reader = new FileReader();
           reader.onload = function (e) {
               //$('#blah').attr('src', e.target.result);
           }
@@ -127,10 +146,10 @@ export class OnboardingComponent implements OnInit {
             let mediaResponse = response.json();
             this.profile.controls['picture_url'].setValue(mediaResponse.url);
           })
-        .subscribe(); // data => console.log('response', data)
+        .subscribe(data => console.log('response', data));
     }
 
-    /* public function upload() {
+    /*public function upload() {
       const files: FileList = this.fileInput.nativeElement.files;
       if (files.length === 0) {
         return;
@@ -148,84 +167,51 @@ export class OnboardingComponent implements OnInit {
   }*/
 
   public changeLearnerType(type: any) {
-    let currentTypeControls: FormArray = this.profile.get('learner_type') as FormArray;
-    let index = currentTypeControls.value.indexOf(type);
-    if (index > -1) {
-      currentTypeControls.removeAt(index);
-    } else {
-      currentTypeControls.push(new FormControl(type));
-    } // Otherwise add this type.
+    var currentTypeControls: FormArray = this.profile.get('learner_type') as FormArray;
+    var index = currentTypeControls.value.indexOf(type);
+    if(index > -1) currentTypeControls.removeAt(index) //If the user currently uses this type, remove it.
+    else currentTypeControls.push(new FormControl(type)); //Otherwise add this type.
   }
 
   public changeInterests(topic: any) {
-    let index = this.interests.indexOf(topic);
-    if (index > -1) {
-      this.interests.splice(index, 1); // If the user currently uses this topic, remove it.
-    } else {
-      this.interests.push(topic); // Otherwise add this topic.
-    }
+  debugger;
+    var index = this.interests.indexOf(topic);
+    if(index > -1) this.interests.splice(index,1); //If the user currently uses this topic, remove it.
+    else this.interests.push(topic); //Otherwise add this topic.
   }
 
-  public submitProfile(event) {
+  public submitProfile(event)
+  {
+    //console.log(this.profile);
     let body = this.profile._value;
-    let learner_Type;
-    let languages;
-    learner_Type = this.profile._value.learner_type.map((type) => type.id);
-    // languages = this.profile._value.languages.split(',');
-    // body.languages = languages;
-    body.languages = this.selectedLanguages;
-    body.learner_type = learner_Type;
-    let headers = new Headers();
+    let learner_type, languages;
+    learner_type = this.profile._value.learner_type.map(type=>type.id);
+    languages = this.profile._value.languages.split(',');
+    body.languages = languages;
+    body.learner_type = learner_type;
+    console.log(body);
+    var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    if (this.step < 5) {
+    if(this.step <5)
       this.http.patch(this.config.apiUrl + '/api/peers/' + this.userId + '/profile', body, options)
           .map((response: Response) => {
+              //console.log(response.json());
               this.step++;
           })
           .subscribe();
-    }
   }
 
-  public submitInterests(interests) {
-    let topicArray = [];
-    this.interests.forEach((topic) => {
-      /* this.http.put(this.config.apiUrl +  '/api/peers/'
-          + this.userId + '/topics/rel/' + topic.id)
-                .map((response: Response) => {} ).subscribe();*/
-      topicArray.push(topic.id);
+  public submitInterests(interests)
+  {
+    this.interests.forEach((topic) =>
+    {
+      console.log(topic);
+      this.http.put(this.config.apiUrl +  '/api/peers/' + this.userId + '/topics/rel/' + topic.id)
+                .map((response: Response) =>{}).subscribe();
     });
-    if (topicArray.length !== 0) {
-      this.http.put(this.config.apiUrl +  '/api/peers/' + this.userId
-                  + '/topics/rel/' + topicArray)
-                .map((response: Response) => {} ).subscribe();
-    }
     this.step++;
-
-  }
-
-  private getCookieValue(key: string) {
-    let cookieValue = this._cookieService.get(key).split(/[ \:.]+/);
-    this.userId = cookieValue[1];
-    return this.userId;
-  }
-
-  private getProfile() {
-    let reqObject = { where : { userId : this.getCookieValue('userId')} };
-    return this.http.get(this.config.apiUrl + '/api/profiles?filter='
-            + encodeURIComponent(JSON.stringify(reqObject)))
-          .map((response: Response) => {
-            this.profile.controls['id'].setValue(response.json()[0].id);
-          }).subscribe(); // data => console.log('response', data)
-  }
-
-  private getTopics() {
-    return this.http.get(this.config.searchUrl + '/api/search/topics')
-                    .map((response: Response) => {
-                      this.suggestedTopics = response.json();
-                      console.log(typeof this.suggestedTopics);
-                    }).subscribe(); // data => console.log('response', data)
 
   }
 

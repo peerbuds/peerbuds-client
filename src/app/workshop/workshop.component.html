@@ -1,0 +1,58 @@
+<div class="position-relative">
+  <!-- content starts here-->
+  <div id="content" class="workshop-content">
+    <div class="container-fluid">
+      <div class="workshop steps" [hidden]="step!=0">
+        <div class="row">
+          <div class="col-sm-6">
+            <form class="margin-bottom-50" [formGroup]="workshop" (ngSubmit)="continueToStep(1)" novalidate>
+              <div class="step">Step 1</div>
+              <div class="stepHeader">Create the best workshop ever</div>
+              <div class="">topics, experiences, phone number, confirm email,</div>
+              <button class="workshop-btn btn btn-lg btn-primary margin-top-30" type="Submit">Continue</button>
+            </form>
+            <form class="margin-bottom-100" [formGroup]="workshop" (ngSubmit)="continueToStep(2)" novalidate>
+              <div class="step">Step 2</div>
+              <div class="stepHeader">Let people know who you are</div>
+              <div class="">topics, experiences, phone number, confirm email,</div>
+              <button class="workshop-btn btn btn-lg btn-primary margin-top-30 hide" type="Submit">Continue</button>
+            </form>
+            <form [formGroup]="workshop" (ngSubmit)="continueToStep(3)" novalidate>
+              <div class="step">Step 2</div>
+              <div class="stepHeader">Review and submit</div>
+              <div class="">topics, experiences, phone number, confirm email,</div>
+              <button class="workshop-btn btn btn-lg btn-primary margin-top-30 hide" type="Submit">Continue</button>
+            </form>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+      <div class="workshop step-1" [hidden]="step!=1"> 
+        <form [formGroup]="workshop" (ngSubmit)="submitWorkshop()" novalidate>
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="step">Step 1 Create the best workshop ever</div>
+              <div class="progressBar ">
+                <span style="width:8.33%; "></span>
+              </div>
+              <div class="stepHeader">What languages are it going to be in</div>
+              <div>Give the world a teste of your workshop by showcasing captivating photos and introduction video.</div>
+              <div class="form-group">
+                <label>Select Language</label>
+                <input type="text" class="form-control" placeholder="Select" formControlName="languages" />
+                <!--<select class="form-control">
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                </select>-->
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+        </form>
+      </div>
+      <!-- step 1 ends here -->
+    </div>
+  </div>
+  <!-- content ends here-->
+</div>
