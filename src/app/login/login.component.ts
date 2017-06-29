@@ -5,12 +5,13 @@ import { AlertService, AuthenticationService } from '../_services/index';
 
 import { AppState } from '../app.service';
 import { XLargeDirective } from './x-large';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'login',  // <login></login>
   providers: [],
   // Our list of styles in our component. We may add more to compose many styles together
-  styleUrls: [ './login.component.css' ],
+  styleUrls: [ './login.component.scss' ],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './login.component.html'
 })
@@ -20,14 +21,22 @@ export class LoginComponent implements OnInit {
   public loading = false;
   public returnUrl: string;
   public loggedIn = false;
+  public email:any;
+  public passWord:any;
   // TypeScript public modifiers
+
+  public loginForm = new FormGroup({
+    email : new FormControl(null, Validators.required), /* putting reg ex as well */
+    password : new FormControl(null, Validators.required)
+  })
 
   constructor(
     public appState: AppState,
     private route: ActivatedRoute,
     public router: Router,
     public authenticationService: AuthenticationService,
-    private alertService: AlertService) {}
+    private alertService: AlertService,
+    private _fb: FormBuilder) {}
 
   public ngOnInit() {
     // get return url from route parameters or default to '/'
@@ -37,7 +46,9 @@ export class LoginComponent implements OnInit {
   public login() {
       this.loading = true;
       this.loggedIn = this.authenticationService.isLoggedIn();
-      this.authenticationService.login(this.model.username, this.model.password)
+      this.email = this.loginForm.controls['email'];
+      this.passWord = this.loginForm.controls['password'];
+      this.authenticationService.login(this.email, this.passWord)
           .subscribe(
               (data) => {
                   this.router.navigate([this.returnUrl]);
@@ -48,15 +59,11 @@ export class LoginComponent implements OnInit {
               });
   }
 
-  public signup(provider) {
-    this.authenticationService.signup(provider).subscribe(
-      (data) => {
-      }
-    );
-  }
-
   private redirect() {
     this.router.navigate([ this.returnUrl ]); // use the stored url here
   }
 
+  public signup(){
+    form.submit();
+  }
 }
