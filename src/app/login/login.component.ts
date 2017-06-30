@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   public loading = false;
   public returnUrl: string;
   public loggedIn = false;
-  public email:any;
-  public passWord:any;
+  public email: string;
+  public passWord: string;
   // TypeScript public modifiers
 
   public loginForm = new FormGroup({
@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit {
   public login() {
       this.loading = true;
       this.loggedIn = this.authenticationService.isLoggedIn();
-      this.email = this.loginForm.controls['email'];
-      this.passWord = this.loginForm.controls['password'];
+      this.email = this.loginForm.controls['email'].value;
+      this.passWord = this.loginForm.controls['password'].value;
       this.authenticationService.login(this.email, this.passWord)
           .subscribe(
               (data) => {
