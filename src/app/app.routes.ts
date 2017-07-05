@@ -4,6 +4,7 @@ import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
 import { AboutComponent } from './about/index';
 import { RegisterComponent } from './register/index';
+import { ProfileComponent } from './profile/index';
 import { NoContentComponent } from './no-content';
 import { AuthGuard } from './_guards/index';
 
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
 { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
 { path: 'about', component: AboutComponent },
 { path: 'register', component: RegisterComponent },
+{ path: 'profile', component: ProfileComponent },
 { path: 'detail', loadChildren: './+detail#DetailModule'},
 { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
 { path: '**',    component: NoContentComponent },

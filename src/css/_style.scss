@@ -57,7 +57,7 @@ input {
   &:focus, &[type="checkbox"], &[type="checkbox:uncheck"], &[type="radio"] {
     outline-color: transparent;
     outline: none;
-    -webkit-appearance: none;
+    // -webkit-appearance: none;
   }
 }
 
@@ -930,7 +930,8 @@ input {
 	padding: 0 !important;
 
 	.modal-content {
-		border-radius: 10px;
+		border-radius: 0;
+		border:none;
 		padding: 20px 30px;
 	}
 	.modal-title {

@@ -1,0 +1,328 @@
+<!--component html goes here -->
+<div id="content" class="profile-setion">
+    <div class="container-fluid">
+        <div class="profile-headings">
+            <div class="pull-left">
+                <div class="title">Hey, I am Yuri</div>
+                <div class="sub-title">UX/UI Designer <a class="text-grey text-underline bullet">www.janshoen.com</a></div>
+            </div>
+            <div class="pull-right margin-top-20">
+                <span class="online-status online" title="Online"></span>
+                <button class="btn btn-default" title="Message"><i class="fa fa-envelope"></i></button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row margin-top-50">
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="profile-image-big col-sm-4">
+                        <img src="http://lorempixel.com/280/375/people/9" alt="image" />
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="profile-image-right-content">
+                            <span>English, Dutch</span>
+                            <span>Amsterdum</span>
+                        </div>
+                        <div class="profile-image-right-content">
+                            <span>Ratings</span>
+                            <span>Karma</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="seperate-section">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <strong>About me</strong>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="fs-14 text-grey lh-28">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et rutrum leo. Sed efficitur tortor
+                                sed eros vehicula, ac gravida urna euismod. Donec justo lacus, dictum et mi non, tristique
+                                dignissim neque. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="seperate-section">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <strong>What I teach</strong>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="margin-bottom-50">
+                                <h3>Web Design</h3>
+                                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et rutrum leo. Sed efficitur
+                                    tortor sed eros vehicula, ac gravida urna euismod. Donec justo lacus, dictum et mi non,
+                                    tristique dignissim neque. </p>
+                            </div>
+                            <div class="margin-bottom-50">
+                                <h3>UI/UX Design</h3>
+                                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et rutrum leo. Sed efficitur
+                                    tortor sed eros vehicula, ac gravida urna euismod. Donec justo lacus, dictum et mi non,
+                                    tristique dignissim neque. </p>
+                            </div>
+                            <div>
+                                <h3>Web Design</h3>
+                                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et rutrum leo. Sed efficitur
+                                    tortor sed eros vehicula, ac gravida urna euismod. Donec justo lacus, dictum et mi non,
+                                    tristique dignissim neque. </p>
+                            </div>
+                            <a href="#">More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="seperate-section">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <strong>Resume</strong>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="margin-bottom-50">
+                                <div class="resume-thumb"></div>
+                                <div class="display-inline-block fs-14">
+                                    <p class="fw-bold">Work Experience</p>
+                                    <p>
+                                        <span>Illustrator</span>
+                                        <span class="bullet">Fireworks</span>
+                                    </p>
+                                    <p>2013 - Present</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="resume-thumb"></div>
+                                <div class="display-inline-block fs-14">
+                                    <p class="fw-bold">Education</p>
+                                    <p>
+                                        <span>Bachelor</span>
+                                        <span class="bullet">Graphic Design</span>
+                                    </p>
+                                    <p>University of Toronto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="seperate-section padding-bottom-0">
+                    <div class="margin-bottom-30">
+                        <p class="fw-bold">Reviews</p>
+                        <span class="text-grey">From Learners</span>
+                    </div>
+                    <div class="review-section">
+                        <img src="http://lorempixel.com/35/35/people/1" class="review-thumb thumb-circle" />
+                        <div class="review-content">
+                            <h3 class="review-title">Leah Carlston</h3>
+                            <rating [(ngModel)]="rate" [readonly]="isReadonly"></rating> <span class="display-inline-block fs-14">{{rate}}</span>
+                            <!--<div class="review-rating"></div> <span class="display-inline-block fs-14">4.5</span>-->
+                            <div class="review-desc">He is a good teacher. Learned lots from him. He is always ready to provide you with any extra
+                                help you might need. I would recommend others to take this course. <i class="fa fa-quote-right fs-15"></i></div>
+                        </div>
+                    </div>
+                    <div class="review-section">
+                        <img src="http://lorempixel.com/35/35/people/2" class="review-thumb thumb-circle" />
+                        <div class="review-content">
+                            <h3 class="review-title">Leah Carlston</h3>
+                            <rating [(ngModel)]="rate" [readonly]="isReadonly"></rating> <span class="display-inline-block fs-14">{{rate}}</span>
+                            <!--<div class="review-rating"></div> <span class="display-inline-block fs-14">4.5</span>-->
+                            <div class="review-desc">He is a good teacher. Learned lots from him. He is always ready to provide you with any extra
+                                help you might need. I would recommend others to take this course. <i class="fa fa-quote-right fs-15"></i></div>
+                        </div>
+                    </div>
+                    <div class="review-all">
+                        <a href="#">See all</a>
+                    </div>
+                </div>
+                <div class="seperate-section padding-bottom-0">
+                    <div class="margin-bottom-30">
+                        <span class="text-grey">From Teachers</span>
+                    </div>
+                    <div class="review-section">
+                        <img src="http://lorempixel.com/35/35/people/1" class="review-thumb thumb-circle" />
+                        <div class="review-content">
+                            <h3 class="review-title">Leah Carlston</h3>
+                            <rating [(ngModel)]="rate" [readonly]="isReadonly"></rating> <span class="display-inline-block fs-14">{{rate}}</span>
+                            <!--<div class="review-rating"></div> <span class="display-inline-block fs-14">4.5</span>-->
+                            <div class="review-desc">He is a good teacher. Learned lots from him. He is always ready to provide you with any extra
+                                help you might need. I would recommend others to take this course. <i class="fa fa-quote-right fs-15"></i></div>
+                        </div>
+                    </div>
+                    <div class="review-section">
+                        <img src="http://lorempixel.com/35/35/people/2" class="review-thumb thumb-circle" />
+                        <div class="review-content">
+                            <h3 class="review-title">Leah Carlston</h3>
+                            <rating [(ngModel)]="rate" [readonly]="isReadonly"></rating> <span class="display-inline-block fs-14">{{rate}}</span>
+                            <!--<div class="review-rating"></div> <span class="display-inline-block fs-14">4.5</span>-->
+                            <div class="review-desc">He is a good teacher. Learned lots from him. He is always ready to provide you with any extra
+                                help you might need. I would recommend others to take this course. <i class="fa fa-quote-right fs-15"></i></div>
+                        </div>
+                    </div>
+                    <div class="review-all">
+                        <a href="#">See all</a>
+                    </div>
+                </div>
+                <div class="seperate-section">
+                    <div class="row">
+                        <div class="col-sm-3">Interested in</div>
+                        <div class="col-sm-9">
+                            <div class="interested-category">
+                                <span>Photography</span>
+                                <span>Architecture</span>
+                                <span>Videography</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="seperate-section">
+                    <div class="row">
+                        <div class="col-sm-3">Learning journey</div>
+                        <div class="col-sm-9">
+                            <div class="learning-journey">
+                                <p>
+                                    <span class="lj-thumb"></span> 3 Sessions
+                                </p>
+                                <p>
+                                    <span class="lj-thumb"></span> 3 Workshops
+                                </p>
+                                <p>
+                                    <span class="lj-thumb"></span> 1 Experience
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pCommunities">
+                    <h3 class="margin-bottom-20">Communities</h3>
+                    <ul class="pCommunitiesUl clearfix">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="sidebar-right">
+                    <div class="sidebar-box">
+                        <h3>Teaching</h3>
+                        <div class="sidebar-section" (click)="bookSessionModal.show()">
+                            <div class="section-thumb display-inline-block margin-right-20 vertical-align-top"></div>
+                            <div class="display-inline-block">
+                                <div class="heading">Session</div>
+                                <div class="desc">Book a session</div>
+                            </div>
+                        </div>
+                        <div class="sidebar-section">
+                            <div class="section-thumb display-inline-block margin-right-20 vertical-align-top"></div>
+                            <div class="display-inline-block">
+                                <div class="heading">3 Workshops</div>
+                                <div class="desc">See dates</div>
+                            </div>
+                        </div>
+                        <div class="sidebar-section">
+                            <div class="section-thumb display-inline-block margin-right-20 vertical-align-top"></div>
+                            <div class="display-inline-block">
+                                <div class="heading">1 Experience</div>
+                                <div class="desc">See dates</div>
+                            </div>
+                        </div>
+                        <div class="sidebar-details">
+                            <span class="display-block text-grey">2 people are looking at his profile now</span>
+                            <span class="display-block text-grey">53 others have looked at this in the past</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-bottom">
+                        <label class="radio-inline">
+                            <input type="radio" name="sidebarBookmark" id="sidebarBookmark" value="bookmark"> Bookmark
+                        </label>
+                        <div class="social-icons">
+                            <label class="fw-normal">Share</label>
+                            <span class="icon-span"></span>
+                            <span class="icon-span"></span>
+                            <span class="icon-span"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="similar-peers-head">Similar Peers</h2>
+            <div class="col-sm-3">
+                <div class="similar-peers-col">
+                    <img src="https://uinames.com/api/photos/female/9.jpg" class="img-responsive" alt="image" />
+                    <div class="peers-name">Donna Allen</div>
+                    <div class="peers-topic">Film Industry</div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="similar-peers-col">
+                    <img src="https://uinames.com/api/photos/male/40.jpg" class="img-responsive" alt="image" />
+                    <div class="peers-name">Stephen Bradley</div>
+                    <div class="peers-topic">Film Industry</div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="similar-peers-col">
+                    <img src="https://uinames.com/api/photos/male/10.jpg" class="img-responsive" alt="image" />
+                    <div class="peers-name">Justin Willis</div>
+                    <div class="peers-topic">Film Industry</div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="similar-peers-col">
+                    <img src="https://uinames.com/api/photos/female/16.jpg" class="img-responsive" alt="image" />
+                    <div class="peers-name">Olivia Bradley</div>
+                    <div class="peers-topic">Film Industry</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- book session modal start -->
+<div class="modal fade" bsModal #bookSessionModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="bookSessionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="bookSessionModal.hide()">&times;</button>
+                <h4 class="modal-title">Book a session</h4>
+            </div>
+            <div class="modal-body">
+                <span class="fs-20">Package</span>
+                <form name="bookSessionForm" novalidate>
+                    <div class="row seperate-section">
+                        <div class="col-sm-6">
+                            <label>
+                            <input type="radio" name="package.one"> 2 Session (1 hour each)
+                        </label>
+                            <label>
+                            <input type="radio" name="package.two"> 3 Session (1 hour each)
+                        </label>
+                            <label>
+                            <input type="radio" name="package.trial"> Trial (15 min.)
+                        </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="fw-bold display-block">$30</label>
+                            <label class="fw-bold display-block">$50</label>
+                            <label class="display-block">Free</label>
+                        </div>
+                    </div>
+                    <div class="seperate-section">
+                        <div class="fs-20 margin-bottom-20">What topic you want to learn?</div>
+                        <select class="form-control" name="topic">
+                        <option value="Science">Science</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Design">Design</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                    </div>
+                    <div class="margin-top-30">
+                        <div class="fs-20 margin-bottom-20">Notes for teacher</div>
+                        <textarea class="form-control" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mattis, leo non posuere ultricies, purus metus ullamcorper orci, sed semper ex risus quis nisl.</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-continue">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- book session modal end -->
