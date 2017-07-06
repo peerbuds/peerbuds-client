@@ -34,8 +34,8 @@ export class AuthenticationService {
       this._cookieService.remove(key);
     }
 
-    public login(username: string, password: string) {
-      let body = `{"username":"${username}","password":"${password}"}`;
+    public login(email: string, password: string) {
+      let body = `{"email":"${email}","password":"${password}"}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       let options = new RequestOptions({ headers: headers, withCredentials: true });

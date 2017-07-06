@@ -1,0 +1,299 @@
+// component css goes here
+.profile-headings{
+    &{
+        border-bottom:1px solid #ccc;
+        padding-bottom:20px;
+    }
+    .title{
+        margin-top:0;
+        margin-bottom:15px;
+        font-size:38px;
+        font-weight:400;
+        line-height: 0.8;
+    }
+    .sub-title{
+        color:#666;
+        font-size:0.8750em;
+    }
+    .online-status{
+        &{
+            width:10px;
+            height:10px;
+            display:inline-block;
+            border-radius:50%;
+            background-color:#ccc;
+            margin-right:15px;
+        }
+        &.online{
+            background-color: #7ed321;
+        }
+    }
+}
+.bullet{
+    margin-right:17px;
+    display:inline-block;
+    position:relative;
+    padding-left: 30px;
+    &:before{
+        display: inline-block;
+        position: absolute;
+        content:"";
+        width:6px;
+        height:6px;
+        background-color: #ccc;
+        border-radius: 50%;
+        top:6px;
+        left:10px;
+    }
+}
+.profile-image-right-content{
+    &{
+        margin-bottom:30px
+    }
+    span{
+        margin-right:17px;
+        width:100px;
+        display:inline-block;
+        position:relative;
+        padding-left: 30px;
+        vertical-align: top;
+        
+        &:before{
+            display: inline-block;
+            position: absolute;
+            content:"";
+            width:16px;
+            height:16px;
+            background-color: #bbb;
+            top:0;
+            left:0;
+        }
+    }
+}
+.sidebar-right{
+    .sidebar-box{
+        padding:20px;
+        border:1px solid #bbb;
+        h3{
+            margin:0 0 30px 0;
+        }
+        .sidebar-section{
+            &{
+                margin-bottom:50px;
+                cursor:pointer;
+            }
+            &:hover{
+                opacity: 0.8;
+            }
+            .section-thumb{
+                width:50px;
+                height:50px;
+                border:1px solid #999;
+                background-color:#ccc;
+            }
+            .heading{
+                font-size:18px;
+                margin-bottom:10px;
+            }
+            .desc{
+                font-size:0.8750em;
+            }
+        }
+        .sidebar-details{
+            border-top:1px solid #ccc;
+            padding:15px 0 0;
+            text-align: center;
+            font-size:0.8750em;
+            color:#666;
+            span{
+                line-height: 22px;
+            }
+        }
+    }
+    .sidebar-bottom{
+        &{
+            color:#666;
+            margin-top:20px;
+            font-size:0.8750em;
+            padding:0 15px;
+        }
+        .social-icons{
+            &{
+                float:right;
+            }
+            label{ padding-right:10px;}
+            .icon-span{
+                &{
+                    background-color:#ccc;
+                    width:10px;
+                    height:10px;
+                    border-radius:50%;
+                    display: inline-block;
+                    margin-right:2px;
+                }
+                &:last-child{
+                    margin-right:0;
+                }
+            }
+        }
+    }
+    
+}
+.seperate-section{
+    &{
+        border-bottom:1px solid #ccc;
+        padding:30px 0;
+    }
+    h3{
+        margin:0;
+    }
+    .section-description{
+        font-size:0.8750em;
+        color:#666;
+        line-height: 28px;
+    }
+    .resume-thumb{
+        display:inline-block;
+        width:35px;
+        height:35px;
+        margin-right:20px;
+        background-color:#999;
+        vertical-align: top;
+    }
+}
+.review-section{
+    margin-bottom:30px;
+    &:last-child{margin-bottom:0;}
+    .review-thumb{
+        width:35px;
+        height:35px;
+        position:absolute;
+    }
+    .review-content{
+        &{
+            padding-left:45px;
+            font-size:0.8125em;
+        }
+        .review-title{
+            margin:0;
+        }
+        .review-rating{
+            background:url("../../images/star.svg") repeat-x scroll 0 0 / 12px;
+            height:12px;
+            width:60px;
+            display: inline-block;
+        }
+        .review-desc{
+            color:#999;
+            position:relative;
+            padding-left:15px;
+            &:before{
+                display:inline-block;
+                position:absolute;
+                content:"\f10d";
+                font-size:0.7500em;
+                font-family: "FontAwesome";
+                top:0;
+                left:0;
+            }
+        }
+    }
+}
+.review-all{
+    border-top:1px solid #ccc;
+    text-align:center;
+    a{
+        color:#666;
+        font-weight:600;
+        line-height:34px;
+    }
+}
+.interested-category{
+    span{
+        display:inline-block;
+        margin-right:30px;
+        font-size:0.8750em;
+        color:#666;
+        &:last-child{
+            margin-right:0;
+        }
+    }
+}
+.learning-journey{
+    p{
+        &{
+            display:inline-block;
+            margin-right:50px;
+            font-size:0.8750em;
+            color:#666;
+            text-align: center;
+        }
+        &:last-child{
+            margin-right:0;
+        }
+        .lj-thumb{
+            width:68px;
+            height:50px;
+            background-color:#ccc;
+            border:2px solid #999;
+            display:block;
+            margin:0 auto 20px auto;
+        }
+    }
+}
+.pCommunities{ 
+    .pCommunitiesUl{
+        list-style: none;
+        margin: 0;
+        padding:0;
+        li{
+            width:204px;
+            height:142px;
+            float:left;
+            margin-right:25px;
+            background-color:#777;
+            &:last-child{
+                margin-right:0;
+            }
+        }
+    }
+}
+.similar-peers-head{
+    margin:30px 0;
+    font-weight:300;
+}
+.similar-peers-col{
+    &{
+        color:#666;
+        border:1px solid #ccc;
+        padding-bottom:15px;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    img{
+        margin:0 auto 20px;
+        width:100%;
+    }
+    .peers-name{
+        font-size:23px;
+        font-weight:300;
+        margin-bottom:10px;
+        padding-left:15px;
+
+    }
+    .peers-topic{
+        font-size:1em;
+        padding-left:15px;
+        color:#999;
+    }
+}
+label{
+    font-weight:normal;
+    margin-bottom:15px;
+}
+textarea{
+    resize:none;
+}
+.btn-continue{
+    padding:10px 50px!important;
+}

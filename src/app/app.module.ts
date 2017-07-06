@@ -43,6 +43,7 @@ import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
 import { AboutComponent } from './about/index';
 import { RegisterComponent } from './register/index';
+import { ProfileComponent } from './profile/index';
 import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
 import { MultiselectAutocompleteModule } from './utilityComponent/multiselect-autocomplete/module';
@@ -52,6 +53,8 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+
+import { ModalModule, RatingModule } from 'ngx-bootstrap';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -95,6 +98,7 @@ type StoreType = {
     HomeComponent,
     OnboardingComponent,
     RegisterComponent,
+    ProfileComponent,
     NoContentComponent,
     XLargeDirective,
     LearnerOnboarding,
@@ -108,7 +112,9 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ImageUploadModule.forRoot(),
     MultiselectAutocompleteModule,
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    ModalModule.forRoot(),
+    RatingModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
