@@ -31,10 +31,12 @@ import { AppState, InternalStateType } from './app.service';
 import { AppConfig } from './app.config';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService
-        , AuthenticationService
-        , CountryPickerService
-        , LanguagePickerService } from './_services/index';
+import {
+  AlertService
+  , AuthenticationService
+  , CountryPickerService
+  , LanguagePickerService
+} from './_services/index';
 
 import { LoginComponent } from './login/index';
 import { HomeComponent } from './home/index';
@@ -44,6 +46,9 @@ import { RegisterComponent } from './register/index';
 import { NoContentComponent } from './no-content/index';
 import { XLargeDirective } from './home/x-large';
 import { MultiselectAutocompleteModule } from './utilityComponent/multiselect-autocomplete/module';
+import { LearnerOnboarding } from "./onboarding-learner/index";
+import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
+import { ProgressbarModule } from 'ngx-bootstrap';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -81,7 +86,7 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     AlertComponent,
@@ -91,7 +96,9 @@ type StoreType = {
     OnboardingComponent,
     RegisterComponent,
     NoContentComponent,
-    XLargeDirective
+    XLargeDirective,
+    LearnerOnboarding,
+    WorkshopOnboardingComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -100,7 +107,8 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ImageUploadModule.forRoot(),
-    MultiselectAutocompleteModule
+    MultiselectAutocompleteModule,
+    ProgressbarModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -119,7 +127,7 @@ export class AppModule {
   constructor(
     public appRef: ApplicationRef,
     public appState: AppState
-  ) {}
+  ) { }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
@@ -147,7 +155,7 @@ export class AppModule {
     // recreate root elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // save input values
-    store.restoreInputValues  = createInputTransfer();
+    store.restoreInputValues = createInputTransfer();
     // remove styles
     removeNgStyles();
   }

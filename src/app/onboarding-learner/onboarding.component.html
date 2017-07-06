@@ -1,0 +1,175 @@
+<div class="position-relative">
+
+  <div id="content" class="onboarding-content">
+    <div class="container-fluid">
+      <div class="onboarding step-1" [hidden]="step!=1">
+        <div class="row">
+          <div class="col-sm-7">
+            <h1 class="title">Welcome to Peerbuds</h1>
+            <div class="step">STEP 1 OF 2</div>
+            <div class="stepHeader">Upload the happiest photo of Yourself
+            </div>
+            <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)" novalidate>
+              <div class="upload-image-section imageHolder">
+                <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="imageUploaded($event)"></image-upload>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="onboarding step-2" [hidden]="step!=2">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="title">Help us create the best experience for you</h1>
+            <div class="step">STEP 5 OF 9</div>
+            <div class="stepHeader">What are your interests? <span class="text-grey">Choose any three to continue</span></div>
+            <form [formGroup]="interest1" (ngSubmit)="submitInterests(interest1)">
+              <div class="row">
+                <div class="col-sm-12 margin-bottom-30">
+                  <div class="row">
+                    <!--<div class="col-sm-10">
+                      <input type="text" class="form-control" placeholder="Search for a topic or enter a new one" />
+                    </div>-->
+                    <div class="col-sm-10">
+                      <multiselect-autocomplete [list]="suggestedTopics" (selectedOutput)="selected($event)" [placeholder]="placeholderStringTopic"></multiselect-autocomplete>
+                    </div>
+                    <div class="col-sm-12 margin-top-30">
+                      <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
+                    </div>
+                    <div class="col-sm-3" *ngFor="let topic of suggestedTopics">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                            <input type="checkbox"
+                                    (change)="changeInterests(topic)">
+                                    <i></i>
+                          </label>
+                        <div class="lookingFor-thumb">
+                          <i class="topic.id"></i>
+                        </div>
+                        <span class="lookingForTitle">{{ topic.name }} - {{topic.type}}</span>
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-08">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Academic Topic</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-09">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Artificial Intelligence</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-10">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Business</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-11">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-12">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Academic Topic</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-13">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Artificial Intelligence</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-14">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">Business</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div>
+                    <div class="col-md-5ths col-xs-6">
+                      <div class="lookingFor interest">
+                        <label class="check">
+                              <input type="checkbox" id="chk-15">
+                              <i></i>
+                            </label>
+                        <div class="lookingFor-thumb">
+                        </div>
+                        <span class="lookingForTitle">CAD</span>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <button class="onboarding-btn btn btn-lg btn-default">Next</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

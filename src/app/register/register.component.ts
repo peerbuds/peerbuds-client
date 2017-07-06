@@ -22,7 +22,7 @@ export class RegisterComponent {
     public ngOnInit() {
       // reset login status
       // get return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/onboarding';
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/learner-onboarding';
     }
 
     public register() {
