@@ -50,6 +50,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
+// import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -62,6 +63,9 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+/* const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};*/
 
 /* let providers = {
     "google": {
@@ -107,6 +111,7 @@ type StoreType = {
     MultiselectAutocompleteModule,
     ModalModule.forRoot(),
     RatingModule.forRoot()
+    // PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
