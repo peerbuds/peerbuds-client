@@ -1,14 +1,18 @@
 import {
-  Component,
-  OnInit,
-  Input
+    Component,
+    OnInit,
+    Input
 } from '@angular/core';
-import { AuthenticationService, CountryPickerService
-      , LanguagePickerService} from '../_services/index';
+import {
+    AuthenticationService, CountryPickerService
+    , LanguagePickerService
+} from '../_services/index';
 import { AppState } from '../app.service';
 import { XLargeDirective } from './x-large';
-import { Http, URLSearchParams, Headers, Response, BaseRequestOptions
-      , RequestOptions, RequestOptionsArgs } from '@angular/http';
+import {
+    Http, URLSearchParams, Headers, Response, BaseRequestOptions
+    , RequestOptions, RequestOptionsArgs
+} from '@angular/http';
 import { AppConfig } from '../app.config';
 import { CookieService } from 'angular2-cookie/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
@@ -25,20 +29,35 @@ export class ProfileComponent implements OnInit {
     public max: number = 5;
     public rate: number = 4;
     public isReadonly: boolean = true;
+    public showHideSession: boolean = true;
+    public showHideSession2: boolean = false;
 
     constructor(
-    public appState: AppState,
-    public authenticationService: AuthenticationService,
-    private http: Http, private config: AppConfig,
-    private countryPickerService: CountryPickerService,
-    private languagePickerService: LanguagePickerService,
-    private _cookieService: CookieService,
-    private _fb: FormBuilder
+        public appState: AppState,
+        public authenticationService: AuthenticationService,
+        private http: Http, private config: AppConfig,
+        private countryPickerService: CountryPickerService,
+        private languagePickerService: LanguagePickerService,
+        private _cookieService: CookieService,
+        private _fb: FormBuilder
     ) {
 
     }
 
     public ngOnInit() {
         
+    }
+
+    toggleSession(numb) {
+        switch (numb) {
+            case 1: {
+                this.showHideSession = (this.showHideSession == true ? false : true )
+                break;
+            }
+             case 2: {
+                this.showHideSession2 = (this.showHideSession2 == true ? false : true )
+                break;
+            }
+        }
     }
 }
