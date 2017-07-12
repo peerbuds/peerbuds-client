@@ -56,6 +56,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
+// import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -68,6 +69,9 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+/* const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};*/
 
 /* let providers = {
     "google": {
