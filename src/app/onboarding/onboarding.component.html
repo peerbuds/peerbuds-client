@@ -16,7 +16,7 @@
 </div> -->
 
 <div class="position-relative">
-<!--class="position-relative"-->
+  <!--class="position-relative"-->
   <!-- content starts here-->
   <div id="content" class="onboarding-content">
     <div class="container-fluid">
@@ -28,14 +28,14 @@
             <div class="step">STEP 1 OF 9</div>
             <div class="stepHeader">Tell us a little about yourself</div>
             <form [formGroup]="profile" (ngSubmit)="submitProfile(profile)" novalidate>
-            <!-- <div class="upload-image-section">
+              <!-- <div class="upload-image-section">
               <div class="profile-photo">
                 <img src="http://lorempixel.com/164/164/people/9" class="" alt="Profile Photo" title="Scott Medina" width="164">
               </div>
               <a href="#" class="btn btn-default btn-lg">Upload Image</a>
             </div> -->
-            <div class="upload-image-section imageHolder">
-              <!-- <div class="profile-photo image">
+              <div class="upload-image-section imageHolder">
+                <!-- <div class="profile-photo image">
                 <div class="x-mark hide">
                     <span class="close"></span>
                 </div>
@@ -46,21 +46,17 @@
                     Upload Image
                 </label>
               </div> -->
-              <!--<image-container></image-container>-->
-              <image-upload [max]="1"
-                [buttonCaption]="'Upload Image'"
-                [dropBoxMessage]="''"
-                (onFileUploadFinish)="imageUploaded($event)"
-                ></image-upload>
+                <!--<image-container></image-container>-->
+                <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="imageUploaded($event)"></image-upload>
 
                 <!-- <input #fileInput type="file" (change)="upload()" > -->
-            </div>
+              </div>
 
               <div class="row">
                 <div class="col-sm-6 margin-bottom-30">
                   <div class="form-group">
                     <label class="display-block">First Name</label>
-                    <input type="text" class="form-control" formControlName="first_name"/>
+                    <input type="text" class="form-control" formControlName="first_name" />
                   </div>
                   <div class="form-group">
                     <label class="display-block">Last Name</label>
@@ -72,7 +68,7 @@
                     <div class="stepHeader">What languages do you speak?</div>
                     <!--<input type="text" class="form-control" placeholder="Mention the Languages" formControlName="languages"/>-->
                     <multiselect-autocomplete [list]="languagesArray" (selectedOutput)="selected($event)" [placeholder]=""></multiselect-autocomplete>
-                    </div>
+                  </div>
                 </div>
                 <div class="col-sm-6 margin-bottom-30">
                   <div class="form-group">
@@ -101,7 +97,7 @@
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="form-group">
                     <label class="display-block">Create your headline</label>
-                    <input type="text" class="form-control" formControlName="headline"/>
+                    <input type="text" class="form-control" formControlName="headline" />
                   </div>
                 </div>
                 <div class="col-sm-12 margin-bottom-30">
@@ -185,8 +181,8 @@
                   <div class="row">
 
                     <div class="col-sm-3" *ngFor="let type of learnerType_array.learner_type">
-                        <div class="lookingFor">
-                          <label class="check">
+                      <div class="lookingFor">
+                        <label class="check">
                             <input type="checkbox"
                                     [checked]="profile._value['learner_type'].includes(type)"
                                     (change)="changeLearnerType(type)">
@@ -271,9 +267,7 @@
               <div class="row">
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="row">
-                    <!--<div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="Search for a topic or enter a new one" />
-                    </div>-->
+
                     <div class="col-sm-10">
                       <multiselect-autocomplete [list]="suggestedTopics" (selectedOutput)="selected($event)" [placeholder]="placeholderStringTopic"></multiselect-autocomplete>
                     </div>
@@ -281,8 +275,8 @@
                       <div class="text-uppercase text-grey margin-bottom-10">Suggested Topics</div>
                     </div>
                     <div class="col-sm-3" *ngFor="let topic of suggestedTopics">
-                        <div class="lookingFor interest">
-                          <label class="check">
+                      <div class="lookingFor interest">
+                        <label class="check">
                             <input type="checkbox"
                                     (change)="changeInterests(topic)">
                                     <i></i>
@@ -293,117 +287,6 @@
                         <span class="lookingForTitle">{{ topic.name }} - {{topic.type}}</span>
                       </div>
                     </div>
-
-                    <!-- <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-08">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Academic Topic</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-09">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Artificial Intelligence</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-10">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Business</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-11">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">CAD</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-15">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">CAD</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-12">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Academic Topic</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-13">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Artificial Intelligence</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-14">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">Business</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-15">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">CAD</span>
-                      </div>
-                    </div>
-                    <div class="col-md-5ths col-xs-6">
-                      <div class="lookingFor interest">
-                        <label class="check">
-                              <input type="checkbox" id="chk-15">
-                              <i></i>
-                            </label>
-                        <div class="lookingFor-thumb">
-                        </div>
-                        <span class="lookingForTitle">CAD</span>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </div>

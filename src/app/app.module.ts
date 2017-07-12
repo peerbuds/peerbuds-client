@@ -50,7 +50,8 @@ import { MultiselectAutocompleteModule } from './utilityComponent/multiselect-au
 import { LearnerOnboarding } from "./onboarding-learner/index";
 import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 import { ProgressbarModule } from 'ngx-bootstrap';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { WorkshopContentComponent } from "./onboarding-workshop/workshop-content";
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
@@ -102,7 +103,8 @@ type StoreType = {
     NoContentComponent,
     XLargeDirective,
     LearnerOnboarding,
-    WorkshopOnboardingComponent
+    WorkshopOnboardingComponent,
+    WorkshopContentComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -114,7 +116,8 @@ type StoreType = {
     MultiselectAutocompleteModule,
     ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
