@@ -1,0 +1,38 @@
+<button type="button" class="btn btn-primary" (click)=addContent()>Online</button>
+<button type="button" class="btn btn-primary" (click)=addContent()>In Person</button>
+<button type="button" class="btn btn-primary" (click)=addContent()>Video</button>
+<button type="button" class="btn btn-primary" (click)=addContent()>Project</button>
+
+<div [formGroup]="itenaryForm">
+    <div class="form-group col-xs-12">
+        <label>Date</label>
+        <input type="text" class="form-control" formControlName="date">
+    </div>
+    <div formArrayName="contents">
+        <div *ngFor="let Content of itenaryForm.controls.contents.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+                <span>Content {{i + 1}}</span>
+                <span class="glyphicon glyphicon-remove pull-right" *ngIf="itenaryForm.controls.contents.controls.length > 1" (click)="removeContent(i)"></span>
+            </div>
+            <div>
+
+                <div class="panel-body" [formGroupName]="i">
+                    <div class="form-group col-xs-6">
+                        <label>title</label>
+                        <input type="text" class="form-control" formControlName="title">
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label>description</label>
+                        <input type="text" class="form-control" formControlName="description">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="margin-20">
+        <a (click)="addContent()" style="cursor: default">
+      Add another Content +
+    </a>
+    </div>
+    <pre>{{itenaryForm.value | json}}</pre>
+</div>

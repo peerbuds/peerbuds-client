@@ -54,6 +54,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { WorkshopContentComponent } from "./onboarding-workshop/workshop-content";
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { InPersonContentsComponent } from "./onboarding-workshop/workshop-content/content-view/content-view.component";
 
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -108,7 +109,8 @@ type StoreType = {
     XLargeDirective,
     LearnerOnboarding,
     WorkshopOnboardingComponent,
-    WorkshopContentComponent
+    WorkshopContentComponent,
+    InPersonContentsComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

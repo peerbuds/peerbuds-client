@@ -17,6 +17,7 @@ import { AppConfig } from '../app.config';
 import { CookieService } from 'angular2-cookie/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 
 // import { Profile } from './interfaces/profile.interface';
 
@@ -43,6 +44,7 @@ export class WorkshopOnboardingComponent implements OnInit {
   public selectedTopic: FormGroup;
   public workshopId: string;
   public calendar: FormGroup;
+
   public key = 'access_token';
 
   public contentGroup: FormGroup;
@@ -73,6 +75,7 @@ export class WorkshopOnboardingComponent implements OnInit {
     private _cookieService: CookieService,
     private _fb: FormBuilder,
     private countryPickerService: CountryPickerService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.getCookieValue('userId');
     this.countryPickerService.getCountries()
@@ -113,9 +116,7 @@ export class WorkshopOnboardingComponent implements OnInit {
       // id: new FormControl(''),
     });
 
-    this.interest1 = new FormGroup({
-
-    });
+    this.interest1 = new FormGroup({});
 
     this.workshop = new FormGroup({
       languages: new FormControl(''),
@@ -139,6 +140,12 @@ export class WorkshopOnboardingComponent implements OnInit {
 
     this.difficulties = ["Beginner", "Intermediate", "Advanced"];
 
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params.step) {
+        this.step = params.step;
+      }
+
+    });
 
     this.createWorkshop();
   }
@@ -335,6 +342,12 @@ export class WorkshopOnboardingComponent implements OnInit {
         this.suggestedTopics = response.json();
       }).subscribe(); // data => console.log('response', data)
 
+  }
+
+  /**
+   * goto(toggleStep)  */
+  public goto(toggleStep) {
+    this.step = toggleStep;
   }
 
 }

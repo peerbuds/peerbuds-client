@@ -1,10 +1,39 @@
-<div *ngFor="let step of item.controls.steps.controls; let i = index"></div>
-
-<form [formGroup]="content" (ngSubmit)="submitContent(content)" novalidate>
-
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+        <div class="col-xs-12">
+            <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+
+                <!--itenary-->
+                <div formArrayName="itenary">
+                    <div *ngFor="let Itenary of myForm.controls.itenary.controls; let i=index" class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>Itenary {{i + 1}}</span>
+                            <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.itenary.controls.length > 1" (click)="removeItenary(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <itenary [group]="myForm.controls.itenary.controls[i]" [itenaryId]="i"></itenary>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="margin-20">
+                    <a (click)="addItenary()" style="cursor: default">
+              Add another Itenary +
+            </a>
+                </div>
+
+                <div class="margin-20">
+                    <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="margin-20">
+                    <div>myForm details:-</div>
+                    <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
+                    <pre>form value: <br>{{myForm.value | json}}</pre>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>

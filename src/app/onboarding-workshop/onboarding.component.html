@@ -4,30 +4,30 @@
   <div class="navbar navbar-inverse navbar-fixed-left">
     <a class="navbar-brand" href="#">Brand</a>
     <ul class="nav navbar-nav">
-      <li><a class="disableClick"><strong>About</strong></a></li>
-      <li><a href="#">Your photo</a></li>
-      <li><a href="#">Your Bio</a></li>
-      <li><a href="#">Language</a></li>
-      <li><a href="#">Topic Category</a></li>
+      <li><strong>About</strong> </li>
+      <li (click)=goto(1)>Your photo </li>
+      <li (click)=goto(2)>Your Bio </li>
+      <li (click)=goto(3)>Language </li>
+      <li (click)=goto(4)>Topic Category </li>
       <hr>
-      <li><a class="disableClick"><strong>Workshop</strong></a></li>
-      <li><a href="#">Workshop Title</a></li>
+      <li><strong>Workshop</strong> </li>
+      <li (click)=goto(5)>Workshop Title </li>
       <!--headliner-->
-      <li><a href="#">What We'll Teach</a></li>
-      <li><a href="#">Who should come</a></li>
-      <li><a href="#">How many learners?</a></li>
-      <li><a href="#">Workshop Photos</a></li>
-      <li><a href="#">Timeline</a></li>
-      <li><a href="#">Session Dates</a></li>
+      <li (click)=goto(6)>What We'll Teach </li>
+      <li (click)=goto(7)>Who should come </li>
+      <li (click)=goto(8)>How many learners? </li>
+      <li (click)=goto(9)>Workshop Photos </li>
+      <li (click)=goto(10)>Timeline </li>
+      <!-- <li>Session Dates </li> -->
       <hr>
-      <li><a class="disableClick"><strong>Finishing Touches</strong></a></li>
-      <li><a href="#">Seats Available</a></li>
-      <li><a href="#">Age requirements</a></li>
-      <li><a href="#">Apointments</a></li>
-      <li><a href="#">Price</a></li>
-      <li><a href="#">Prepareation Time</a></li>
-      <li><a href="#">Payment Option</a></li>
-      <li><a href="#">Review and Submit</a></li>
+      <li><strong>Finishing Touches</strong> </li>
+      <!-- <li>Seats Available </li> -->
+      <!-- <li>Age requirements </li> -->
+      <li>Apointments </li>
+      <li>Price </li>
+      <li>Prepareation Time </li>
+      <li>Payment Option </li>
+      <li>Review and Submit </li>
 
     </ul>
   </div>
@@ -38,10 +38,9 @@
           <progressbar [max]="max" [value]="step">
             <span style="color:white; white-space:nowrap;">{{step}} / {{max}}</span>
           </progressbar>
-          {{workshop.value | json}}
         </div>
       </div>
-      <div class="container-fluid">
+      <div class="container-fluid clearfix">
         <div class="onboarding step-1" [hidden]="step!=1">
           <div class="row">
             <div class="col-sm-7">
@@ -221,6 +220,7 @@
         </div>
         <!-- step 8 ends here -->
         <div class="onboarding step-9" [hidden]="step!=9">
+
           <div class="row">
             <div class="col-sm-7">
               <div class="stepHeader">Showcase your workshop</div>
@@ -248,7 +248,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="stepHeader">What days are your workshop?</div>
-
+              <workshop-content></workshop-content>
             </div>
           </div>
         </div>
@@ -275,6 +275,10 @@
 
             </div>
           </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-20">
+          <pre>{{workshop.value | json}}</pre>
         </div>
       </div>
     </div>

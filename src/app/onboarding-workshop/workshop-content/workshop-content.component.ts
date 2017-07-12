@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Customer } from './customer.interface';
+
 import {
     Http, URLSearchParams, Headers, Response, BaseRequestOptions
     , RequestOptions, RequestOptionsArgs
 } from '@angular/http';
 import { AppConfig } from '../../app.config';
-import {
-    AuthenticationService, CountryPickerService
-    , LanguagePickerService
-} from '../../_services/index';
+import { AuthenticationService } from '../../_services/index';
 
 
 @Component({
@@ -20,49 +19,55 @@ import {
 })
 
 export class WorkshopContentComponent implements OnInit {
-    @Input() workshopId: string;
-    @Input() calendar: FormGroup;
-
-    public content: FormGroup;
-    public schedule: FormGroup;
-    public
-
+    public myForm: FormGroup;
     constructor(
         public authenticationService: AuthenticationService,
         private http: Http, private config: AppConfig,
+        private _fb: FormBuilder
     ) {
 
     }
 
-    public ngOnInit() {
-
+    ngOnInit() {
+        this.myForm = this._fb.group({
+            itenary: this._fb.array([
+                this.initItenary(),
+            ])
+        });
+    }
+    initItenary() {
+        return this._fb.group({
+            date: [''],
+            contents: this._fb.array([
+                this.initContent(),
+            ])
+        });
+    }
+    initContent() {
+        return this._fb.group({
+            title: [''],
+            startTime: [''],
+            endTime: [''],
+            pic_url: [''],
+            description: [''],
+            include: [''],
+            prerequisites: ['']
+        });
+    }
+    addItenary() {
+        const control = <FormArray>this.myForm.controls['itenary'];
+        control.push(this.initItenary());
     }
 
-    /**
-     * submitContent
-     */
-    public submitContent() {
-        let body = this.content.value;
-        let learner_Type;
-        let languages;
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers, withCredentials: true });
-        this.http.post(this.config.apiUrl + '/api/collection/' + this.workshopId + '/contents', body, options)
-            .map((response: Response) => {
-                console.log(response);
-            })
-            .subscribe();
-
+    removeItenary(i: number) {
+        const control = <FormArray>this.myForm.controls['itenary'];
+        control.removeAt(i);
     }
 
-    /**
-     * submitSchedule
-     */
-    public submitSchedule() {
-
+    save(model: Customer) {
+        // call API to save
+        // ...
+        console.log(model);
     }
-
 
 }
