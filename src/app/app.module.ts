@@ -55,6 +55,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
+import { ReviewAndPayComponent } from "./review-and-pay/review-and-pay.component";
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // Application wide providers
@@ -106,7 +107,8 @@ type StoreType = {
     NoContentComponent,
     XLargeDirective,
     LearnerOnboarding,
-    WorkshopOnboardingComponent
+    WorkshopOnboardingComponent,
+    ReviewAndPayComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

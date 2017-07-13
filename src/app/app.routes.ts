@@ -11,6 +11,7 @@ import { LearnerOnboarding } from "./onboarding-learner/index";
 import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 
 import { DataResolver } from './app.resolver';
+import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -20,6 +21,8 @@ export const ROUTES: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'onboarding-learner', component: LearnerOnboarding },
     { path: 'onboarding-workshop', component: WorkshopOnboardingComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'review-and-pay', component: ReviewAndPayComponent },
     { path: 'detail', loadChildren: './+detail#DetailModule' },
     { path: 'barrel', loadChildren: './+barrel#BarrelModule' },
     { path: '**', component: NoContentComponent }

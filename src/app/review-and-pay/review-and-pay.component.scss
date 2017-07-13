@@ -1,0 +1,87 @@
+// component css goes here
+
+.title{
+    font-size:32px;
+    font-weight:600;
+    line-height: 0.8;
+}
+
+.bullet{
+    margin-right:17px;
+    display:inline-block;
+    position:relative;
+    padding-left: 30px;
+    &:before{
+        display: inline-block;
+        position: absolute;
+        content:"";
+        width:6px;
+        height:6px;
+        background-color: #ccc;
+        border-radius: 50%;
+        top:6px;
+        left:10px;
+    }
+}
+
+.sidebar-right{
+    .sidebar-box{
+        padding:20px;
+        border:1px solid #bbb;
+        h3{
+            margin:0 0 30px 0;
+        }
+    }
+}
+.seperate-section{
+    &{
+        border-bottom:1px solid #ccc;
+        padding:20px 0;
+    }
+    &:last-child{
+        border-bottom:none;
+        padding-bottom:0;
+    }
+    h3{
+        margin:0;
+    }
+    .section-description{
+        font-size:0.8750em;
+        color:#666;
+        line-height: 28px;
+    }
+}
+
+label{
+    font-weight:normal;
+    margin-bottom:15px;
+    &:last-child{
+        margin-bottom:0;
+    }
+    .fw-bold{
+        font-weight: bold;
+    }
+}
+textarea{
+    resize:none;
+}
+form[name="review-and-pay"]{
+    label{
+        font-size:18px;
+        margin-bottom:5px;
+        &.small{
+            font-size:13px;
+        }
+    }
+    .fs-18:before{
+        font-size:18px;
+    }
+}
+.terms-text{
+    font-size:15px;
+    margin-bottom:30px;
+    .terms-title{
+        font-size:18px;
+        margin-bottom:20px;
+    }
+}
