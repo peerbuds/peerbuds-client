@@ -38,22 +38,10 @@ export class WorkshopContentComponent implements OnInit {
     initItenary() {
         return this._fb.group({
             date: [''],
-            contents: this._fb.array([
-                this.initContent(),
-            ])
+            contents: this._fb.array([])
         });
     }
-    initContent() {
-        return this._fb.group({
-            title: [''],
-            startTime: [''],
-            endTime: [''],
-            pic_url: [''],
-            description: [''],
-            include: [''],
-            prerequisites: ['']
-        });
-    }
+
     addItenary() {
         const control = <FormArray>this.myForm.controls['itenary'];
         control.push(this.initItenary());
@@ -67,7 +55,7 @@ export class WorkshopContentComponent implements OnInit {
     save(model: Customer) {
         // call API to save
         // ...
-        console.log(model);
+        console.log("Save Triggered");
     }
 
 }

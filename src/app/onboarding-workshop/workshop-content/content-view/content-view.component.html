@@ -1,9 +1,80 @@
-<button type="button" class="btn btn-primary" (click)=addContent()>Online</button>
-<button type="button" class="btn btn-primary" (click)=addContent()>In Person</button>
-<button type="button" class="btn btn-primary" (click)=addContent()>Video</button>
-<button type="button" class="btn btn-primary" (click)=addContent()>Project</button>
-
 <div [formGroup]="itenaryForm">
+
+    <button type="button" class="btn btn-primary" (click)="addContent();onlineModal.show()">+Online</button>
+    <div bsModal #onlineModal="bs-modal" class="modal fade" [config]="{ ignoreBackdropClick: true }" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Online Content</h4>
+                    <button type="button" class="close pull-right" (click)="onlineModal.hide();remove()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="addContent();inPersonModal.show()">+In Person</button>
+    <div bsModal #inPersonModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">InPersonModal Content</h4>
+                    <button type="button" class="close pull-right" (click)="inPersonModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="addContent();videoModal.show()">+Video</button>
+    <div bsModal #videoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Video Content</h4>
+                    <button type="button" class="close pull-right" (click)="videoModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="addContent();projectModal.show()">+Project</button>
+    <div bsModal #projectModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Project Content</h4>
+                    <button type="button" class="close pull-right" (click)="projectModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="form-group col-xs-12">
         <label>Date</label>
         <input type="text" class="form-control" formControlName="date">

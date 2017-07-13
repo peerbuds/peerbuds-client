@@ -1,24 +1,33 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'itenary',
     templateUrl: 'content-view.component.html'
 })
-export class InPersonContentsComponent {
+export class InPersonContentsComponent implements OnInit {
     // we will pass in address from App component
     @Input('group')
     public itenaryForm: FormGroup;
     @Input('itenaryId')
     public itenaryId: Number;
 
+    currentIndex: number;
+    dontAllow: true;
+
     constructor(
         private _fb: FormBuilder
     ) {
     }
 
+    ngOnInit() {
+        const content = <FormArray>this.itenaryForm.controls.contents;
+        this.currentIndex = content.controls.length - 1;
+        console.log(this.currentIndex);
+    }
+
     addContent() {
-        console.log(this.itenaryForm);
+        console.log("Add Content Triggered");
         const contentArary = <FormArray>this.itenaryForm.controls['contents'];
         contentArary.push(this.initContent());
     }
@@ -39,5 +48,13 @@ export class InPersonContentsComponent {
         console.log("Removing");
         const control = <FormArray>this.itenaryForm.controls['contents'];
         control.removeAt(i);
+    }
+
+    addIndex() {
+        this.currentIndex++;
+    }
+
+    resetIndex() {
+        this.currentIndex++;
     }
 }

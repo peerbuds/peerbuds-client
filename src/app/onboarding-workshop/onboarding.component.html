@@ -248,7 +248,27 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="stepHeader">What days are your workshop?</div>
-              <workshop-content></workshop-content>
+              <form [formGroup]="calendar" (ngSubmit)="submitCalendar(calendar)" novalidate>
+                <div class="row">
+                  <div class="col-sm-6 margin-bottom-30">
+                    <input type="date" formControlName="startDate">
+                  </div>
+                  <div class="col-sm-6 margin-bottom-30">
+                    <input type="date" formControlName="endDate">
+                  </div>
+                </div>
+                <div class="row" *ngIf="calendar.value.endDate">
+                  <workshop-content></workshop-content>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+                  </div>
+                </div>
+              </form>
+
+
+
             </div>
           </div>
         </div>
