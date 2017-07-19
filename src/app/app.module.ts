@@ -54,9 +54,12 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
-import { ModalModule, RatingModule } from 'ngx-bootstrap';
+import { ModalModule, RatingModule, BsDropdownModule } from 'ngx-bootstrap';
 import { ReviewAndPayComponent } from "./review-and-pay/review-and-pay.component";
+import { TeachingComponent } from "./teaching/teaching.component";
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { SessionsDetailsComponent } from './teaching/teaching-sessions/sessions-details.component';
+import { CancelSessionComponent } from './cancel-session/cancel-session.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -108,7 +111,10 @@ type StoreType = {
     XLargeDirective,
     LearnerOnboarding,
     WorkshopOnboardingComponent,
-    ReviewAndPayComponent
+    ReviewAndPayComponent,
+    TeachingComponent,
+    SessionsDetailsComponent,
+    CancelSessionComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -120,7 +126,8 @@ type StoreType = {
     MultiselectAutocompleteModule,
     ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    BsDropdownModule.forRoot()
     // PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
