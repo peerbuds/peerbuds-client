@@ -18,8 +18,8 @@ import { CookieService } from 'angular2-cookie/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
-
 // import { Profile } from './interfaces/profile.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'workshop-onboarding',
@@ -43,18 +43,24 @@ export class WorkshopOnboardingComponent implements OnInit {
   public workshop: FormGroup;
   public selectedTopic: FormGroup;
   public workshopId: string;
-  public calendar: FormGroup;
-
   public key = 'access_token';
+  public timeline: FormGroup;
 
   public contentGroup: FormGroup;
 
-  public difficulties = []
-
+  public difficulties = [];
+  public cancellationPolicies = [];
   public contentComplete = false;
+  public currencies = [];
+
+
+  profileImagePending: Boolean;
+  workshopVideoPending: Boolean;
+  workshopImage1Pending: Boolean;
+  workshopImage2Pending: Boolean;
 
   public step = 1;
-  public max = 17;
+  public max = 13;
   public learnerType_array = {
     learner_type: [{ id: 'auditory', display: 'Auditory' }
       , { id: 'visual', display: 'Visual' }
@@ -62,10 +68,8 @@ export class WorkshopOnboardingComponent implements OnInit {
       , { id: 'kinesthetic', display: 'Kinesthetic' }]
   };
   public selectedLanguages = [];
-
   public suggestedTopics = [];
   public interests = [];
-
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
@@ -93,6 +97,10 @@ export class WorkshopOnboardingComponent implements OnInit {
 
   public ngOnInit() {
 
+    this.profileImagePending = true;
+    this.workshopVideoPending = true;
+    this.workshopImage1Pending = true;
+    this.workshopImage2Pending = true;
     this.profile = new FormGroup({
       first_name: new FormControl(''),
       last_name: new FormControl(''),
@@ -112,40 +120,69 @@ export class WorkshopOnboardingComponent implements OnInit {
       education: new FormControl(''),
       work_experience: new FormControl(''),
       custom_url: new FormControl(''),
-      profile_video: new FormControl(''),
-      // id: new FormControl(''),
+      profile_video: new FormControl('')
     });
 
     this.interest1 = new FormGroup({});
 
-    this.workshop = new FormGroup({
-      languages: new FormControl(''),
-      stage: new FormControl(''),
-      title: new FormControl(''),
-      headline: new FormControl(''),
-      description: new FormControl(''),
-      difficultyLevel: new FormControl(''),
-      notes: new FormControl(''),
-      maxSpots: new FormControl(''),
+    this.workshop = this._fb.group({
+      type: '',
+      language: '',
+      stage: '',
+      title: '',
+      headline: '',
+      description: '',
+      difficultyLevel: '',
+      notes: '',
+      maxSpots: '',
       imageUrls: this._fb.array([]),
-      videoUrl: new FormControl('')
+      videoUrl: '',
+      repeatFrequency: '',
+      repeatPeriod: '',
+      totalHours: '',
+      repeatUntil: '',
+      price: '',
+      currency: '',
+      cancellationPolicy: '',
+      ageLimit: '',
+      aboutHost: ''
     });
 
-    this.calendar = new FormGroup({
-      startDate: new FormControl(''),
-      endDate: new FormControl('')
+    this.timeline = this._fb.group({
+      calendar: this._fb.group({
+        startDate: '',
+        endDate: ''
+      }),
+      contentGroup: this._fb.group({})
     });
+
+
 
     this.selectedTopic = new FormGroup({});
 
     this.difficulties = ["Beginner", "Intermediate", "Advanced"];
+    this.cancellationPolicies = [{
+      value: 1,
+      text: "24 Hours"
+    }, {
+      value: 3,
+      text: "3 Days"
+    },
+    {
+      value: 7,
+      text: "1 Week"
+    }];
+
+
+    this.currencies = ["USD", "INR", "GBP"]
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.step) {
         this.step = params.step;
       }
-
     });
+
+    this.contentGroup = new FormGroup({});
 
     this.createWorkshop();
   }
@@ -158,12 +195,15 @@ export class WorkshopOnboardingComponent implements OnInit {
     });
   }
   public workshopStepUpdate() {
-    this.workshop.patchValue({
-      "stage": this.step
-    });
+    if (this.workshop.value.stage < this.step) {
+      this.workshop.patchValue({
+        "stage": this.step
+      });
+    }
+
   }
 
-  public imageUploaded(event) {
+  public profileImageUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
@@ -175,17 +215,34 @@ export class WorkshopOnboardingComponent implements OnInit {
       .map((response: Response) => {
         let mediaResponse = response.json();
         this.profile.controls['picture_url'].setValue(mediaResponse.url);
+        this.profileImagePending = false;
       })
       .subscribe(); // data => console.log('response', data)
+  }
+
+  profileImageRemoved(event) {
+    this.profile.controls['picture_url'].reset();
+    this.profileImagePending = true;
   }
 
   public addUrl(value: String) {
     const control = <FormArray>this.workshop.controls['imageUrls'];
     // push the value from stepTextArea to array
+    switch (control.length) {
+      case 0:
+        this.workshopImage1Pending = false;
+        break;
+      case 1:
+        this.workshopImage2Pending = false;
+        break;
+      default:
+        break;
+    }
+    this.workshopImage1Pending = false;
     control.push(new FormControl(value));
   }
 
-  public workshopImageUploaded(event) {
+  workshopImageUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
@@ -198,7 +255,8 @@ export class WorkshopOnboardingComponent implements OnInit {
       })
       .subscribe(); // data => console.log('response', data)
   }
-  public workshopVideoUploaded(event) {
+
+  workshopVideoUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
@@ -207,7 +265,8 @@ export class WorkshopOnboardingComponent implements OnInit {
     this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290', formData)
       .map((response: Response) => {
         let mediaResponse = response.json();
-        this.profile.controls['videoUrl'].setValue(mediaResponse.url);
+        this.workshop.controls['videoUrl'].setValue(mediaResponse.url);
+        this.workshopVideoPending = false;
       })
       .subscribe(); // data => console.log('response', data)
   }
@@ -276,6 +335,8 @@ export class WorkshopOnboardingComponent implements OnInit {
 
   public submitWorkshop(data) {
     var body = data.value;
+    var currentLanguage = body.language;
+    body.language = [currentLanguage];
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
@@ -289,19 +350,34 @@ export class WorkshopOnboardingComponent implements OnInit {
   }
 
 
-  public submitCalendar(data) {
-    var body = data.value;
-    console.log(body);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    let options = new RequestOptions({ headers: headers, withCredentials: true });
-    this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId + '/calendar', body, options)
-      .map((response: Response) => {
-        this.step++;
-        this.workshopStepUpdate()
-      })
-      .subscribe();
+
+  /**
+   * numberOfdays
+  */
+  public numberOfdays(currentDate, startDate) {
+    let current = moment(currentDate);
+    let start = moment(startDate);
+    return current.diff(start, 'days');
+  }
+
+  public submitTimeline(data: FormGroup) {
+    var body = data.value.calendar;
+    if (body.startDate && body.endDate) {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      let options = new RequestOptions({ headers: headers, withCredentials: true });
+      this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId + '/calendar', body, options)
+        .map((response: Response) => {
+          this.step++;
+          this.workshopStepUpdate();
+        })
+        .subscribe();
+    } else {
+      console.log("Enter Date!");
+    }
+
+
   }
 
   public submitInterests(interests) {
@@ -348,6 +424,12 @@ export class WorkshopOnboardingComponent implements OnInit {
    * goto(toggleStep)  */
   public goto(toggleStep) {
     this.step = toggleStep;
+  }
+
+
+  submitForReview() {
+    console.log("Submitted!");
+
   }
 
 }

@@ -70,7 +70,7 @@ export class LearnerOnboarding implements OnInit {
       .subscribe((languages) => this.languagesArray = languages);
     console.log(typeof this.languagesArray);
     // this.getProfile();
-    this.getTopics();
+   // this.getTopics();
 
   }
 
@@ -205,8 +205,6 @@ export class LearnerOnboarding implements OnInit {
         + '/topics/rel/' + topicArray)
         .map((response: Response) => { }).subscribe();
     }
-    this.step++;
-
   }
 
   private getCookieValue(key: string) {
