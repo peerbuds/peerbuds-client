@@ -8,15 +8,16 @@
       <li (click)=goto(1)>Your photo </li>
       <li (click)=goto(2)>Your Bio </li>
       <li (click)=goto(3)>Language </li>
-      <li (click)=goto(4)>Topic Category </li>
       <hr>
-      <li><strong>Workshop</strong> </li>
-      <li (click)=goto(5)>Workshop Title </li>
+      <li><strong>Experience</strong> </li>
+      <li (click)=goto(4)>Experience Title </li>
+
+      <li (click)=goto(5)>Topic Category</li>
       <!--headliner-->
       <li (click)=goto(6)>What We'll Teach </li>
       <li (click)=goto(7)>Who should come </li>
       <li (click)=goto(8)>How many learners? </li>
-      <li (click)=goto(9)>Workshop Photos </li>
+      <li (click)=goto(9)>Experience Photos </li>
       <li (click)=goto(10)>Timeline </li>
       <!-- <li>Session Dates </li> -->
       <hr>
@@ -67,7 +68,7 @@
           <div class="row">
             <div class="col-sm-7">
               <h1 class="title">Tell us your bio</h1>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="row">
                   <div class="col-sm-12 margin-bottom-30">
                     <div class="form-group">
@@ -87,7 +88,7 @@
           <div class="row">
             <div class="col-sm-7">
               <h1 class="title">What languages are it going to be in</h1>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="row">
                   <div class="col-sm-12 margin-bottom-30">
                     <div class="row">
@@ -106,8 +107,33 @@
         <!-- step 3 ends here -->
         <div class="onboarding step-4" [hidden]="step!=4">
           <div class="row">
+            <div class="col-sm-12">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
+                <div class="row">
+                  <div class="col-sm-12 margin-bottom-30">
+                    <div class="form-group">
+                      <label class="display-block">Name to Your Experience</label>
+                      <input type="text" class="form-control" formControlName="title" />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 margin-bottom-30">
+                    <div class="form-group">
+                      <label class="display-block">Headline</label>
+                      <input type="text" class="form-control" formControlName="headline" />
+                    </div>
+                  </div>
+                </div>
+                <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- step 4 ends here  -->
+
+        <div class="onboarding step-5" [hidden]="step!=5">
+          <div class="row">
             <div class="col-sm-7">
-              <div class="stepHeader">What topic catagory is this Workshop? </div>
+              <div class="stepHeader">What topic catagory is this Experience? </div>
               <form [formGroup]="interest1" (ngSubmit)="submitInterests(interest1)">
                 <div class="row">
                   <div class="col-sm-12 margin-bottom-30">
@@ -139,38 +165,14 @@
             </div>
           </div>
         </div>
-        <!-- step 4 ends here  -->
-        <div class="onboarding step-5" [hidden]="step!=5">
-          <div class="row">
-            <div class="col-sm-12">
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
-                <div class="row">
-                  <div class="col-sm-12 margin-bottom-30">
-                    <div class="form-group">
-                      <label class="display-block">Name to Your workshop</label>
-                      <input type="text" class="form-control" formControlName="title" />
-                    </div>
-                  </div>
-                  <div class="col-sm-12 margin-bottom-30">
-                    <div class="form-group">
-                      <label class="display-block">Give a descriptive one liner sentence</label>
-                      <input type="text" class="form-control" formControlName="headline" />
-                    </div>
-                  </div>
-                </div>
-                <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
-              </form>
-            </div>
-          </div>
-        </div>
         <!-- step 5 ends here -->
         <div class="onboarding step-6" [hidden]="step!=6">
           <div class="row">
-            <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+            <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
               <div class="row">
                 <div class="col-sm-12 margin-bottom-30">
                   <div class="form-group">
-                    <label class="display-block">What we’ll teach</label>
+                    <label class="display-block">What’s the experience about?</label>
                     <textarea class="form-control" maxlength="200" formControlName="description"></textarea>
                     <span class="text-right text-grey display-block margin-top-5">max. 200 chars</span>
                   </div>
@@ -185,7 +187,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h1 class="title">Who should come</h1>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="col-sm-12 margin-bottom-30">
                   <select class="form-control" formControlName="difficultyLevel">
                       <option [value]="">--Select--</option>
@@ -209,7 +211,7 @@
           <div class="row">
             <div class="col-sm-7">
               <div class="stepHeader">How many learners? </div>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="col-sm-12 margin-bottom-30">
                   <input type="number" formControlName="maxSpots">
                 </div>
@@ -223,22 +225,22 @@
 
           <div class="row">
             <div class="col-sm-7">
-              <div class="stepHeader">Showcase your workshop</div>
+              <div class="stepHeader">Showcase your experience</div>
               <div class="row">
-                <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)" novalidate>
-                  <div class="row">
-                    <div class="col-md-8">
+                <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)" novalidate>
+                  <div class="col-md-8">
+                    <div class="row">
                       <div class="stepHeader">Upload Video</div>
-                      <span class="label label-warning" [hidden]="!workshopVideoPending">Pending</span>
-                      <span class="label label-success" [hidden]="workshopVideoPending">Success</span>
-                      <image-upload [max]="1" [buttonCaption]="'Upload Video'" [dropBoxMessage]="''" (onFileUploadFinish)="workshopVideoUploaded($event)"></image-upload>
+                      <span class="label label-warning" [hidden]="!experienceVideoPending">Pending</span>
+                      <span class="label label-success" [hidden]="experienceVideoPending">Success</span>
+                      <image-upload [max]="1" [buttonCaption]="'Upload Video'" [dropBoxMessage]="''" (onFileUploadFinish)="experienceVideoUploaded($event)"></image-upload>
                       <div class="stepHeader">Upload Images</div>
-                      <span class="label label-warning" [hidden]="!workshopImage1Pending">Pending</span>
-                      <span class="label label-success" [hidden]="workshopImage1Pending">Success</span>
-                      <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="workshopImageUploaded($event)"></image-upload>
-                      <span class="label label-warning" [hidden]="!workshopImage2Pending">Pending</span>
-                      <span class="label label-success" [hidden]="workshopImage2Pending">Success</span>
-                      <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="workshopImageUploaded($event)"></image-upload>
+                      <span class="label label-warning" [hidden]="!experienceImage1Pending">Pending</span>
+                      <span class="label label-success" [hidden]="experienceImage1Pending">Success</span>
+                      <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="experienceImageUploaded($event)"></image-upload>
+                      <span class="label label-warning" [hidden]="!experienceImage2Pending">Pending</span>
+                      <span class="label label-success" [hidden]="experienceImage2Pending">Success</span>
+                      <image-upload [max]="1" [buttonCaption]="'Upload Image'" [dropBoxMessage]="''" (onFileUploadFinish)="experienceImageUploaded($event)"></image-upload>
                     </div>
                   </div>
                   <div class="row">
@@ -255,7 +257,7 @@
         <div class="onboarding step-10" [hidden]="step!=10">
           <div class="row">
             <div class="col-sm-12">
-              <div class="stepHeader">What days are your workshop?</div>
+              <div class="stepHeader">What days are your experience?</div>
               <form [formGroup]="timeline" (ngSubmit)="submitTimeline(timeline)" novalidate>
                 <div formGroupName="calendar">
                   <div class="row">
@@ -268,8 +270,8 @@
                   </div>
                 </div>
                 <div class="row" *ngIf="timeline.controls.calendar.value.endDate && timeline.controls.calendar.value.endDate">
-                  <workshop-content [itenary]="timeline.controls.contentGroup" [collectionId]="workshopId" [calendar]="timeline.controls.calendar.value">
-                  </workshop-content>
+                  <experience-content [itenary]="timeline.controls.contentGroup" [collectionId]="experienceId" [calendar]="timeline.controls.calendar.value">
+                  </experience-content>
                 </div>
                 <div class="row">
                   <div class="col-md-4 col-md-offset-8">
@@ -284,8 +286,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="stepHeader">Are you open for appointments?</div>
-              <div>Placeholder for Calendar in Angular 4</div>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
 
                 <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
               </form>
@@ -295,8 +296,8 @@
         <div class="onboarding step-12" [hidden]="step!=12">
           <div class="row">
             <div class="col-sm-12">
-              <div class="stepHeader">What is the price of the workshop?</div>
-              <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
+              <div class="stepHeader">What is the price of the experience?</div>
+              <form [formGroup]="experience" (ngSubmit)="submitExperience(experience)">
                 <div class="col-sm-12 margin-bottom-30">
                   Price:
                   <input type="number" formControlName="price">
@@ -321,20 +322,15 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="stepHeader">Review and submit</div>
-              <button (click)="submitForReview()"> Submit for Review</button>
-
-              <div class="margin-20">
-                <pre>{{workshop.value | json}}</pre>
-                <pre>{{timeline.value | json}}</pre>
-              </div>
+              <button class="onboarding-btn btn btn-lg btn-default" (click)="submitForReview()"> Submit for Review</button>
             </div>
           </div>
         </div>
         <div class="clearfix"></div>
-        <!--<div class="margin-20">
-          <pre>{{workshop.value | json}}</pre>
+        <div class="margin-20">
+          <pre>{{experience.value | json}}</pre>
           <pre>{{timeline.value | json}}</pre>
-        </div>-->
+        </div>
       </div>
     </div>
   </div>

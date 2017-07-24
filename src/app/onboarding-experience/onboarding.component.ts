@@ -22,7 +22,7 @@ import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router
 import * as moment from 'moment';
 
 @Component({
-  selector: 'workshop-onboarding',
+  selector: 'experience-onboarding',
   // We need to tell Angular's Dependency Injection which providers are in our app.
   providers: [],
   // Our list of styles in our component. We may add more to compose many styles together
@@ -30,7 +30,7 @@ import * as moment from 'moment';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './onboarding.component.html'
 })
-export class WorkshopOnboardingComponent implements OnInit {
+export class ExperienceOnboardingComponent implements OnInit {
   // Set our default values
   public localState = { value: '' };
   public countries: any[];
@@ -40,12 +40,11 @@ export class WorkshopOnboardingComponent implements OnInit {
   public userId: string;
   public profile: FormGroup;
   public interest1: FormGroup;
-  public workshop: FormGroup;
+  public experience: FormGroup;
   public selectedTopic: FormGroup;
-  public workshopId: string;
+  public experienceId: string;
   public key = 'access_token';
   public timeline: FormGroup;
-  public returnUrl: string;
 
   public contentGroup: FormGroup;
 
@@ -56,9 +55,9 @@ export class WorkshopOnboardingComponent implements OnInit {
 
 
   profileImagePending: Boolean;
-  workshopVideoPending: Boolean;
-  workshopImage1Pending: Boolean;
-  workshopImage2Pending: Boolean;
+  experienceVideoPending: Boolean;
+  experienceImage1Pending: Boolean;
+  experienceImage2Pending: Boolean;
 
   public step = 1;
   public max = 13;
@@ -74,7 +73,6 @@ export class WorkshopOnboardingComponent implements OnInit {
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
-    public router: Router,
     public authenticationService: AuthenticationService,
     private http: Http, private config: AppConfig,
     private languagePickerService: LanguagePickerService,
@@ -100,9 +98,9 @@ export class WorkshopOnboardingComponent implements OnInit {
   public ngOnInit() {
 
     this.profileImagePending = true;
-    this.workshopVideoPending = true;
-    this.workshopImage1Pending = true;
-    this.workshopImage2Pending = true;
+    this.experienceVideoPending = true;
+    this.experienceImage1Pending = true;
+    this.experienceImage2Pending = true;
     this.profile = new FormGroup({
       first_name: new FormControl(''),
       last_name: new FormControl(''),
@@ -127,7 +125,7 @@ export class WorkshopOnboardingComponent implements OnInit {
 
     this.interest1 = new FormGroup({});
 
-    this.workshop = this._fb.group({
+    this.experience = this._fb.group({
       language: '',
       stage: '',
       title: '',
@@ -185,9 +183,7 @@ export class WorkshopOnboardingComponent implements OnInit {
 
     this.contentGroup = new FormGroup({});
 
-    this.createWorkshop();
-
-    this.returnUrl = '/home';
+    this.createExperience();
   }
 
   initAddress() {
@@ -197,9 +193,9 @@ export class WorkshopOnboardingComponent implements OnInit {
       postcode: ['']
     });
   }
-  public workshopStepUpdate() {
-    if (this.workshop.value.stage < this.step) {
-      this.workshop.patchValue({
+  public experienceStepUpdate() {
+    if (this.experience.value.stage < this.step) {
+      this.experience.patchValue({
         "stage": this.step
       });
     }
@@ -229,23 +225,23 @@ export class WorkshopOnboardingComponent implements OnInit {
   }
 
   public addUrl(value: String) {
-    const control = <FormArray>this.workshop.controls['imageUrls'];
+    const control = <FormArray>this.experience.controls['imageUrls'];
     // push the value from stepTextArea to array
     switch (control.length) {
       case 0:
-        this.workshopImage1Pending = false;
+        this.experienceImage1Pending = false;
         break;
       case 1:
-        this.workshopImage2Pending = false;
+        this.experienceImage2Pending = false;
         break;
       default:
         break;
     }
-    this.workshopImage1Pending = false;
+    this.experienceImage1Pending = false;
     control.push(new FormControl(value));
   }
 
-  workshopImageUploaded(event) {
+  experienceImageUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
@@ -259,17 +255,17 @@ export class WorkshopOnboardingComponent implements OnInit {
       .subscribe(); // data => console.log('response', data)
   }
 
-  workshopVideoUploaded(event) {
+  experienceVideoUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
     let formData = new FormData();
+    this.experience.controls['videoUrl'].setValue(mediaResponse.url);
     formData.append('file', event.file);
     this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290', formData)
       .map((response: Response) => {
         let mediaResponse = response.json();
-        this.workshop.controls['videoUrl'].setValue(mediaResponse.url);
-        this.workshopVideoPending = false;
+        this.experienceVideoPending = false;
       })
       .subscribe(); // data => console.log('response', data)
   }
@@ -311,7 +307,7 @@ export class WorkshopOnboardingComponent implements OnInit {
       this.http.patch(this.config.apiUrl + '/api/peers/' + this.userId + '/profile', body, options)
         .map((response: Response) => {
           this.step++;
-          this.workshopStepUpdate()
+          this.experienceStepUpdate()
         })
         .subscribe();
     }
@@ -320,25 +316,25 @@ export class WorkshopOnboardingComponent implements OnInit {
 
 
   /**
-   * createWorkshop
+   * createExperience
    */
-  public createWorkshop() {
+  public createExperience() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     let options = new RequestOptions({ headers: headers, withCredentials: true });
     var body = {
-      "type": "workshop"
+      "type": "experience"
     };
     this.http.post(this.config.apiUrl + '/api/peers/' + this.userId + '/collections', body, options)
       .map((response: Response) => {
-        this.workshopId = response.json().id;
+        this.experienceId = response.json().id;
       })
       .subscribe();
 
   }
 
-  public submitWorkshop(data) {
+  public submitExperience(data) {
     var body = data.value;
     var currentLanguage = body.language;
     body.language = [currentLanguage];
@@ -346,10 +342,10 @@ export class WorkshopOnboardingComponent implements OnInit {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId, body, options)
+    this.http.patch(this.config.apiUrl + '/api/collections/' + this.experienceId, body, options)
       .map((response: Response) => {
         this.step++;
-        this.workshopStepUpdate()
+        this.experienceStepUpdate()
       })
       .subscribe();
   }
@@ -372,10 +368,10 @@ export class WorkshopOnboardingComponent implements OnInit {
       headers.append('Content-Type', 'application/json');
       headers.append('Accept', 'application/json');
       let options = new RequestOptions({ headers: headers, withCredentials: true });
-      this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId + '/calendar', body, options)
+      this.http.patch(this.config.apiUrl + '/api/collections/' + this.experienceId + '/calendar', body, options)
         .map((response: Response) => {
           this.step++;
-          this.workshopStepUpdate();
+          this.experienceStepUpdate();
         })
         .subscribe();
     } else {
@@ -434,8 +430,6 @@ export class WorkshopOnboardingComponent implements OnInit {
 
   submitForReview() {
     console.log("Submitted!");
-
-    this.router.navigate([this.returnUrl]);
 
   }
 

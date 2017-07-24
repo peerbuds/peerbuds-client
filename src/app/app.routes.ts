@@ -12,7 +12,7 @@ import { LearnerOnboarding } from "./onboarding-learner/index";
 import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 import { DataResolver } from './app.resolver';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
-
+import { ExperienceOnboardingComponent } from "./onboarding-experience";
 export const ROUTES: Routes = [
     { path: '', component: DefaultComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -22,6 +22,7 @@ export const ROUTES: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'onboarding-learner', component: LearnerOnboarding },
     { path: 'onboarding-workshop', component: WorkshopOnboardingComponent },
+    { path: 'onboarding-experience', component: ExperienceOnboardingComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'review-and-pay', component: ReviewAndPayComponent },
     { path: 'detail', loadChildren: './+detail#DetailModule' },
