@@ -3,7 +3,6 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import {
   AuthenticationService, CountryPickerService
   , LanguagePickerService
