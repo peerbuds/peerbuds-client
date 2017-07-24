@@ -52,14 +52,19 @@ import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 import { ProgressbarModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { WorkshopContentComponent } from "./onboarding-workshop/workshop-content";
+import { ExperienceContentComponent } from "./onboarding-experience/experience-content";
+import { itenaryViewComponent } from "./onboarding-experience/experience-content/itenary-view/itenary-view.component";
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import { ContentViewComponent } from "./onboarding-workshop/workshop-content/content-view/content-view.component";
-
+import { ExperienceOnboardingComponent } from "./onboarding-experience";
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
 import { ReviewAndPayComponent } from "./review-and-pay/review-and-pay.component";
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 // Application wide providers
+import { AgmCoreModule } from '@agm/core';
+import { TheMapComponent } from "./utilityComponent/the-map/the-map.component";
+
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState
@@ -111,7 +116,11 @@ type StoreType = {
     WorkshopOnboardingComponent,
     WorkshopContentComponent,
     ContentViewComponent,
-    ReviewAndPayComponent
+    ReviewAndPayComponent,
+    ExperienceOnboardingComponent,
+    ExperienceContentComponent,
+    itenaryViewComponent,
+    TheMapComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -124,8 +133,12 @@ type StoreType = {
     ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
     RatingModule.forRoot(),
-    TabsModule.forRoot()
-  ],
+    TabsModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAPmoHUhl1bF9IaSfOWzL4BLQqqMyButP4',
+      libraries: ['places'],
+      language: 'en-US'
+    })],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
