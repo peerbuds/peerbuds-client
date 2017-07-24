@@ -15,9 +15,11 @@ import {
 } from '@angular/http';
 import { AppConfig } from '../app.config';
 import { CookieService } from 'angular2-cookie/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-
+import { FormGroup, FormArray, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 // import { Profile } from './interfaces/profile.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'workshop-onboarding',
@@ -39,11 +41,26 @@ export class WorkshopOnboardingComponent implements OnInit {
   public profile: FormGroup;
   public interest1: FormGroup;
   public workshop: FormGroup;
-
+  public selectedTopic: FormGroup;
+  public workshopId: string;
   public key = 'access_token';
+  public timeline: FormGroup;
+
+  public contentGroup: FormGroup;
+
+  public difficulties = [];
+  public cancellationPolicies = [];
+  public contentComplete = false;
+  public currencies = [];
+
+
+  profileImagePending: Boolean;
+  workshopVideoPending: Boolean;
+  workshopImage1Pending: Boolean;
+  workshopImage2Pending: Boolean;
 
   public step = 1;
-  public max = 9;
+  public max = 13;
   public learnerType_array = {
     learner_type: [{ id: 'auditory', display: 'Auditory' }
       , { id: 'visual', display: 'Visual' }
@@ -51,26 +68,24 @@ export class WorkshopOnboardingComponent implements OnInit {
       , { id: 'kinesthetic', display: 'Kinesthetic' }]
   };
   public selectedLanguages = [];
-
   public suggestedTopics = [];
   public interests = [];
-
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
     public authenticationService: AuthenticationService,
     private http: Http, private config: AppConfig,
-    private countryPickerService: CountryPickerService,
     private languagePickerService: LanguagePickerService,
     private _cookieService: CookieService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private countryPickerService: CountryPickerService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.getCookieValue('userId');
     this.countryPickerService.getCountries()
       .subscribe((countries) => this.countries = countries);
     this.languagePickerService.getLanguages()
       .subscribe((languages) => this.languagesArray = languages);
-    console.log(this.languagesArray);
     // this.getProfile();
     this.getTopics();
 
@@ -82,12 +97,18 @@ export class WorkshopOnboardingComponent implements OnInit {
 
   public ngOnInit() {
 
+    this.profileImagePending = true;
+    this.workshopVideoPending = true;
+    this.workshopImage1Pending = true;
+    this.workshopImage2Pending = true;
     this.profile = new FormGroup({
       first_name: new FormControl(''),
       last_name: new FormControl(''),
       picture_url: new FormControl(''),
       headline: new FormControl(''),
-      languages: new FormControl(''),
+      languages: new FormArray([
+        new FormControl('')
+      ]),
       location: new FormControl(''),
       experience_type: new FormControl(''),
       // learner_type: new FormControl(''),
@@ -99,19 +120,90 @@ export class WorkshopOnboardingComponent implements OnInit {
       education: new FormControl(''),
       work_experience: new FormControl(''),
       custom_url: new FormControl(''),
-      profile_video: new FormControl(''),
-      // id: new FormControl(''),
+      profile_video: new FormControl('')
     });
 
-    this.interest1 = new FormGroup({
+    this.interest1 = new FormGroup({});
 
+    this.workshop = this._fb.group({
+      type: '',
+      language: '',
+      stage: '',
+      title: '',
+      headline: '',
+      description: '',
+      difficultyLevel: '',
+      notes: '',
+      maxSpots: '',
+      imageUrls: this._fb.array([]),
+      videoUrl: '',
+      repeatFrequency: '',
+      repeatPeriod: '',
+      totalHours: '',
+      repeatUntil: '',
+      price: '',
+      currency: '',
+      cancellationPolicy: '',
+      ageLimit: '',
+      aboutHost: ''
     });
 
-    this.workshop = new FormGroup({
+    this.timeline = this._fb.group({
+      calendar: this._fb.group({
+        startDate: '',
+        endDate: ''
+      }),
+      contentGroup: this._fb.group({})
+    });
 
+
+
+    this.selectedTopic = new FormGroup({});
+
+    this.difficulties = ["Beginner", "Intermediate", "Advanced"];
+    this.cancellationPolicies = [{
+      value: 1,
+      text: "24 Hours"
+    }, {
+      value: 3,
+      text: "3 Days"
+    },
+    {
+      value: 7,
+      text: "1 Week"
+    }];
+
+
+    this.currencies = ["USD", "INR", "GBP"]
+
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params.step) {
+        this.step = params.step;
+      }
+    });
+
+    this.contentGroup = new FormGroup({});
+
+    this.createWorkshop();
+  }
+
+  initAddress() {
+    // initialize our address
+    return this._fb.group({
+      street: ['', Validators.required],
+      postcode: ['']
     });
   }
-  public imageUploaded(event) {
+  public workshopStepUpdate() {
+    if (this.workshop.value.stage < this.step) {
+      this.workshop.patchValue({
+        "stage": this.step
+      });
+    }
+
+  }
+
+  public profileImageUploaded(event) {
     let file = event.src;
     let fileName = event.file.name;
     let fileType = event.file.type;
@@ -123,9 +215,62 @@ export class WorkshopOnboardingComponent implements OnInit {
       .map((response: Response) => {
         let mediaResponse = response.json();
         this.profile.controls['picture_url'].setValue(mediaResponse.url);
+        this.profileImagePending = false;
       })
       .subscribe(); // data => console.log('response', data)
   }
+
+  profileImageRemoved(event) {
+    this.profile.controls['picture_url'].reset();
+    this.profileImagePending = true;
+  }
+
+  public addUrl(value: String) {
+    const control = <FormArray>this.workshop.controls['imageUrls'];
+    // push the value from stepTextArea to array
+    switch (control.length) {
+      case 0:
+        this.workshopImage1Pending = false;
+        break;
+      case 1:
+        this.workshopImage2Pending = false;
+        break;
+      default:
+        break;
+    }
+    this.workshopImage1Pending = false;
+    control.push(new FormControl(value));
+  }
+
+  workshopImageUploaded(event) {
+    let file = event.src;
+    let fileName = event.file.name;
+    let fileType = event.file.type;
+    let formData = new FormData();
+    formData.append('file', event.file);
+    this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290', formData)
+      .map((response: Response) => {
+        let mediaResponse = response.json();
+        this.addUrl(mediaResponse.url);
+      })
+      .subscribe(); // data => console.log('response', data)
+  }
+
+  workshopVideoUploaded(event) {
+    let file = event.src;
+    let fileName = event.file.name;
+    let fileType = event.file.type;
+    let formData = new FormData();
+    formData.append('file', event.file);
+    this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290', formData)
+      .map((response: Response) => {
+        let mediaResponse = response.json();
+        this.workshop.controls['videoUrl'].setValue(mediaResponse.url);
+        this.workshopVideoPending = false;
+      })
+      .subscribe(); // data => console.log('response', data)
+  }
+
 
   public changeLearnerType(type: any) {
     let currentTypeControls: FormArray = this.profile.get('learner_type') as FormArray;
@@ -146,12 +291,12 @@ export class WorkshopOnboardingComponent implements OnInit {
     }
   }
 
+  // languages = this.profile._value.languages.split(',');
   public submitProfile(event) {
     let body = this.profile._value;
     let learner_Type;
     let languages;
     learner_Type = this.profile._value.learner_type.map((type) => type.id);
-    // languages = this.profile._value.languages.split(',');
     // body.languages = languages;
     body.languages = this.selectedLanguages;
     body.learner_type = learner_Type;
@@ -159,13 +304,80 @@ export class WorkshopOnboardingComponent implements OnInit {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    if (this.step < 5) {
+    if (this.step < 3) {
       this.http.patch(this.config.apiUrl + '/api/peers/' + this.userId + '/profile', body, options)
         .map((response: Response) => {
           this.step++;
+          this.workshopStepUpdate()
         })
         .subscribe();
     }
+  }
+
+
+
+  /**
+   * createWorkshop
+   */
+  public createWorkshop() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({ headers: headers, withCredentials: true });
+    var body = {};
+    this.http.post(this.config.apiUrl + '/api/peers/' + this.userId + '/collections', body, options)
+      .map((response: Response) => {
+        this.workshopId = response.json().id;
+      })
+      .subscribe();
+
+  }
+
+  public submitWorkshop(data) {
+    var body = data.value;
+    var currentLanguage = body.language;
+    body.language = [currentLanguage];
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({ headers: headers, withCredentials: true });
+    this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId, body, options)
+      .map((response: Response) => {
+        this.step++;
+        this.workshopStepUpdate()
+      })
+      .subscribe();
+  }
+
+
+
+  /**
+   * numberOfdays
+  */
+  public numberOfdays(currentDate, startDate) {
+    let current = moment(currentDate);
+    let start = moment(startDate);
+    return current.diff(start, 'days');
+  }
+
+  public submitTimeline(data: FormGroup) {
+    var body = data.value.calendar;
+    if (body.startDate && body.endDate) {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      let options = new RequestOptions({ headers: headers, withCredentials: true });
+      this.http.patch(this.config.apiUrl + '/api/collections/' + this.workshopId + '/calendar', body, options)
+        .map((response: Response) => {
+          this.step++;
+          this.workshopStepUpdate();
+        })
+        .subscribe();
+    } else {
+      console.log("Enter Date!");
+    }
+
+
   }
 
   public submitInterests(interests) {
@@ -201,11 +413,22 @@ export class WorkshopOnboardingComponent implements OnInit {
   }
 
   private getTopics() {
-    return this.http.get(this.config.searchUrl + '/api/search/topics')
+    return this.http.get(this.config.apiUrl + '/api/topics')
       .map((response: Response) => {
         this.suggestedTopics = response.json();
-        console.log(typeof this.suggestedTopics);
       }).subscribe(); // data => console.log('response', data)
+
+  }
+
+  /**
+   * goto(toggleStep)  */
+  public goto(toggleStep) {
+    this.step = toggleStep;
+  }
+
+
+  submitForReview() {
+    console.log("Submitted!");
 
   }
 

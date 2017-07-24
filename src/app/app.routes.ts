@@ -9,7 +9,6 @@ import { NoContentComponent } from './no-content';
 import { AuthGuard } from './_guards/index';
 import { LearnerOnboarding } from "./onboarding-learner/index";
 import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
-
 import { DataResolver } from './app.resolver';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 

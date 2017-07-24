@@ -50,14 +50,15 @@ import { MultiselectAutocompleteModule } from './utilityComponent/multiselect-au
 import { LearnerOnboarding } from "./onboarding-learner/index";
 import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 import { ProgressbarModule } from 'ngx-bootstrap';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { WorkshopContentComponent } from "./onboarding-workshop/workshop-content";
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { ContentViewComponent } from "./onboarding-workshop/workshop-content/content-view/content-view.component";
 
 import { ModalModule, RatingModule } from 'ngx-bootstrap';
 import { ReviewAndPayComponent } from "./review-and-pay/review-and-pay.component";
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -108,6 +109,8 @@ type StoreType = {
     XLargeDirective,
     LearnerOnboarding,
     WorkshopOnboardingComponent,
+    WorkshopContentComponent,
+    ContentViewComponent,
     ReviewAndPayComponent
   ],
   imports: [ // import Angular's modules
@@ -120,8 +123,8 @@ type StoreType = {
     MultiselectAutocompleteModule,
     ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
-    RatingModule.forRoot()
-    // PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
+    RatingModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
