@@ -3,6 +3,7 @@ import {
   OnInit,
   Input
 } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   AuthenticationService, CountryPickerService
   , LanguagePickerService
@@ -56,6 +57,8 @@ export class LearnerOnboarding implements OnInit {
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
+    private route: ActivatedRoute,
+    public router: Router,
     public authenticationService: AuthenticationService,
     private http: Http, private config: AppConfig,
     private countryPickerService: CountryPickerService,
@@ -105,6 +108,7 @@ export class LearnerOnboarding implements OnInit {
 
     });
 
+    this.returnUrl = '/home';
   }
 
   /* public readUrl(input) {
@@ -205,6 +209,7 @@ export class LearnerOnboarding implements OnInit {
         + '/topics/rel/' + topicArray)
         .map((response: Response) => { }).subscribe();
     }
+    this.router.navigate([this.returnUrl]);
   }
 
   private getCookieValue(key: string) {

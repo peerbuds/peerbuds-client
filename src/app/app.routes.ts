@@ -14,6 +14,7 @@ import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
     { path: 'about', component: AboutComponent },
