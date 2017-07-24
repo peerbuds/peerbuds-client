@@ -119,6 +119,7 @@ export class AuthenticationService {
     }
 
     public logout() {
+      console.log("Logging off");
         if (this.getCookie(this.key)) {
             this.http.get(this.config.apiUrl + '/auth/logout', {})
                 .map((res: Response) => {
@@ -129,6 +130,7 @@ export class AuthenticationService {
                     this.router.navigate(['/login']);
                 }).subscribe();
         }
+        return true;
 
         /* let headers = new Headers();
         headers.append('Content-Type', 'application/json');

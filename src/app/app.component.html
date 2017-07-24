@@ -2,18 +2,33 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Peerbuds</a>
+        <!-- <a class="navbar-brand" href="#">Peerbuds</a> -->
+        <a href="http://www.peerbuds.com" class="brand" aria-label="Peerbuds Homepage"><img src="/images/pb_logo.png">
+        </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><span style="float:right;margin-right:20px;margin-top:20px;">
+          <!--<li><span style="float:right;margin-right:20px;margin-top:20px;">
               <a href="#" *ngIf="loggedIn" (click)="authenticationService.logout()">
               Logout</a></span></li>
           <li><a *ngIf="!loggedIn" routerLink="register">Sign Up</a></li>
-          <li><a *ngIf="!loggedIn" routerLink="login">Login</a></li>
+          <li><a *ngIf="!loggedIn" routerLink="login">Login</a></li>-->
+            <li class="wrapper dropdown">
+              <div class="content" style="margin-top:16px">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teach<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a [routerLink]="['/onboarding-workshop']">Create a Workshop</a></li>
+                  <li><a [routerLink]="['/onboarding-experience']">Create an Experience</a></li>
+                  <!--<li><a [routerLink]="['/onboarding-session']">Create Sessions</a></li>-->
+                </ul>
+              </div>
+            </li>
+            <li><a *ngIf="!loggedIn" class="link" [routerLink]="['/register']"><div class="wrapper"><div class="content"><span>Sign Up</span></div></div></a></li>
+            <li><a *ngIf="!loggedIn" class="link" [routerLink]="['/login']"><div class="wrapper"><div class="content"><span>Log In</span></div></div></a></li>
+            <li><a *ngIf="loggedIn" class="link" (click)="logout()"><div class="wrapper"><div class="content"><span>Log Out</span></div></div></a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->

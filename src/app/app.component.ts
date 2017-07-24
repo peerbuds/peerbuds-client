@@ -38,6 +38,11 @@ export class AppComponent implements OnInit {
     console.log('Initial App State', this.appState.state);
   }
 
+  public logout() {
+    let loggedOut = this.authenticationService.logout();
+    console.log(loggedOut);
+  }
+
 }
 
 /*

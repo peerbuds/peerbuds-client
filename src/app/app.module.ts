@@ -39,6 +39,7 @@ import {
 } from './_services/index';
 
 import { LoginComponent } from './login/index';
+import { DefaultComponent } from './default/index';
 import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
 import { AboutComponent } from './about/index';
@@ -101,6 +102,7 @@ type StoreType = {
     AlertComponent,
     AboutComponent,
     LoginComponent,
+    DefaultComponent,
     HomeComponent,
     OnboardingComponent,
     RegisterComponent,

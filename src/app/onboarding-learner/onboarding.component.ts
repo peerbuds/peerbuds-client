@@ -39,6 +39,7 @@ export class LearnerOnboarding implements OnInit {
   public userId: string;
   public profile: FormGroup;
   public interest1: FormGroup;
+  public returnUrl: string;
 
   public key = 'access_token';
 

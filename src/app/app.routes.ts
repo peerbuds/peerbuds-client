@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/index';
+import { DefaultComponent } from './default/index';
 import { HomeComponent } from './home/index';
 import { OnboardingComponent } from './onboarding/index';
 import { AboutComponent } from './about/index';
@@ -13,7 +14,7 @@ import { DataResolver } from './app.resolver';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 
 export const ROUTES: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: DefaultComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },

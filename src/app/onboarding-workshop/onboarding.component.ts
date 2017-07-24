@@ -3,6 +3,7 @@ import {
   OnInit,
   Input
 } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   AuthenticationService, CountryPickerService
   , LanguagePickerService
@@ -45,6 +46,7 @@ export class WorkshopOnboardingComponent implements OnInit {
   public workshopId: string;
   public key = 'access_token';
   public timeline: FormGroup;
+  public returnUrl: string;
 
   public contentGroup: FormGroup;
 
@@ -73,6 +75,7 @@ export class WorkshopOnboardingComponent implements OnInit {
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
+    public router: Router,
     public authenticationService: AuthenticationService,
     private http: Http, private config: AppConfig,
     private languagePickerService: LanguagePickerService,
@@ -185,6 +188,8 @@ export class WorkshopOnboardingComponent implements OnInit {
     this.contentGroup = new FormGroup({});
 
     this.createWorkshop();
+
+    this.returnUrl = '/home';
   }
 
   initAddress() {
@@ -429,6 +434,8 @@ export class WorkshopOnboardingComponent implements OnInit {
 
   submitForReview() {
     console.log("Submitted!");
+
+    this.router.navigate([this.returnUrl]);
 
   }
 

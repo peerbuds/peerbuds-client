@@ -155,7 +155,7 @@
                   </div>
                   <div class="col-sm-12 margin-bottom-30">
                     <div class="form-group">
-                      <label class="display-block">Give a descriptive oneliner sentenc</label>
+                      <label class="display-block">Give a descriptive one liner sentence</label>
                       <input type="text" class="form-control" formControlName="headline" />
                     </div>
                   </div>
@@ -286,6 +286,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="stepHeader">Are you open for appointments?</div>
+              <div>Placeholder for Calendar in Angular 4</div>
               <form [formGroup]="workshop" (ngSubmit)="submitWorkshop(workshop)">
 
                 <button class="onboarding-btn btn btn-lg btn-default" type="Submit">Next</button>
@@ -323,14 +324,19 @@
             <div class="col-sm-12">
               <div class="stepHeader">Review and submit</div>
               <button (click)="submitForReview()"> Submit for Review</button>
+
+              <div class="margin-20">
+                <pre>{{workshop.value | json}}</pre>
+                <pre>{{timeline.value | json}}</pre>
+              </div>
             </div>
           </div>
         </div>
         <div class="clearfix"></div>
-        <div class="margin-20">
+        <!--<div class="margin-20">
           <pre>{{workshop.value | json}}</pre>
           <pre>{{timeline.value | json}}</pre>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
