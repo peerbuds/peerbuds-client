@@ -144,11 +144,11 @@ export class ExperienceOnboardingComponent implements OnInit {
       currency: '',
       cancellationPolicy: '',
       ageLimit: '',
-      aboutHost: ''
     });
 
     this.timeline = this._fb.group({
       calendar: this._fb.group({
+        aboutHost: ''
         startDate: '',
         endDate: ''
       }),
@@ -260,11 +260,11 @@ export class ExperienceOnboardingComponent implements OnInit {
     let fileName = event.file.name;
     let fileType = event.file.type;
     let formData = new FormData();
-    this.experience.controls['videoUrl'].setValue(mediaResponse.url);
     formData.append('file', event.file);
     this.http.post(this.config.apiUrl + '/api/media/upload?container=peerbuds-dev1290', formData)
       .map((response: Response) => {
         let mediaResponse = response.json();
+        this.experience.controls['videoUrl'].setValue(mediaResponse.url);
         this.experienceVideoPending = false;
       })
       .subscribe(); // data => console.log('response', data)
