@@ -1,0 +1,46 @@
+// component css goes here
+
+.title{
+    font-size:32px;
+    font-weight:600;
+    line-height: 36px;
+    margin-bottom:30px;
+}
+.bullet {
+    display: inline-block;
+    margin-right: 17px;
+    position: relative;
+    &:after{
+        background-color: #ccc;
+        border-radius: 50%;
+        content: "";
+        display: inline-block;
+        height: 4px;
+        position: absolute;
+        right: -11px;
+        top: 6px;
+        width: 4px;
+    }
+}
+.cancel-session{
+    p{
+        margin-bottom:20px;
+        line-height: 20px;
+    }
+    ul, ol{
+        margin-bottom:20px;
+        li{
+            margin-bottom:10px;
+        }
+    }
+    ol{
+        padding-left:20px;
+    }
+    .btn-cancel{
+            padding:15px 50px;
+            font-size:18px;
+            text-align: center;
+            line-height: 18px;
+            height:46px;
+        }
+}

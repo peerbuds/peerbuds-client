@@ -59,9 +59,14 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import { ContentViewComponent } from "./onboarding-workshop/workshop-content/content-view/content-view.component";
 import { ExperienceOnboardingComponent } from "./onboarding-experience";
-import { ModalModule, RatingModule } from 'ngx-bootstrap';
+import { ModalModule, RatingModule, BsDropdownModule } from 'ngx-bootstrap';
+
 import { ReviewAndPayComponent } from "./review-and-pay/review-and-pay.component";
+import { TeachingComponent } from "./teaching/teaching.component";
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { SessionsDetailsComponent } from './teaching/teaching-sessions/sessions-details.component';
+import { CancelSessionComponent } from './cancel-session/cancel-session.component';
+
 // Application wide providers
 import { AgmCoreModule } from '@agm/core';
 import { TheMapComponent } from "./utilityComponent/the-map/the-map.component";
@@ -122,7 +127,11 @@ type StoreType = {
     ExperienceOnboardingComponent,
     ExperienceContentComponent,
     itenaryViewComponent,
-    TheMapComponent
+    TheMapComponent,
+    ReviewAndPayComponent,
+    TeachingComponent,
+    SessionsDetailsComponent,
+    CancelSessionComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -140,7 +149,9 @@ type StoreType = {
       apiKey: 'AIzaSyAPmoHUhl1bF9IaSfOWzL4BLQqqMyButP4',
       libraries: ['places'],
       language: 'en-US'
-    })],
+    }),
+    BsDropdownModule.forRoot()
+  ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,

@@ -13,6 +13,10 @@ import { WorkshopOnboardingComponent } from "./onboarding-workshop/index";
 import { DataResolver } from './app.resolver';
 import { ReviewAndPayComponent } from './review-and-pay/review-and-pay.component';
 import { ExperienceOnboardingComponent } from "./onboarding-experience";
+import { TeachingComponent } from "./teaching/teaching.component";
+import { SessionsDetailsComponent } from './teaching/teaching-sessions/sessions-details.component';
+import { CancelSessionComponent } from "./cancel-session/cancel-session.component";
+
 export const ROUTES: Routes = [
     { path: '', component: DefaultComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -25,6 +29,9 @@ export const ROUTES: Routes = [
     { path: 'onboarding-experience', component: ExperienceOnboardingComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'review-and-pay', component: ReviewAndPayComponent },
+    { path: 'teaching', component: TeachingComponent },
+    { path: 'sessions-details', component: SessionsDetailsComponent },
+    { path: 'cancel-session', component: CancelSessionComponent },
     { path: 'detail', loadChildren: './+detail#DetailModule' },
     { path: 'barrel', loadChildren: './+barrel#BarrelModule' },
     { path: '**', component: NoContentComponent }

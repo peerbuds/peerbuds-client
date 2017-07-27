@@ -1,0 +1,376 @@
+<!--component html goes here -->
+<div id="content" class="teaching-section">
+    <div class="container-fluid">
+        <div class="container-menu">
+            <a href="javascript:;">Dashboard</a>
+            <a href="javascript:;">Inbox</a>
+            <a href="javascript:;" class="active">Teaching</a>
+            <a href="javascript:;">Learning</a>
+            <a href="javascript:;">Profile</a>
+            <a href="javascript:;">Account</a>
+            <a href="javascript:;">Calendar</a>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 aside-bar">
+                <a href="javascript:;">View all</a>
+                <a href="javascript:;" [ngClass]="{'active':teachingTab=='sessions'}" (click)="selectTab('sessions')">Sessions</a>
+                <a href="javascript:;" [ngClass]="{'active':teachingTab=='workshop'}" (click)="selectTab('workshop')">Workshops</a>
+                <a href="javascript:;" [ngClass]="{'active':teachingTab=='experiences'}" (click)="selectTab('experiences')">Experiences</a>
+                <button class="btn btn-secondary btn-new-session">New session</button>
+            </div>
+            <div class="col-sm-10">
+                <div class="teaching-sessions" [hidden]="teachingTab!='sessions'">
+                    <div class="teaching-box">
+                        <h4>Currently Teaching</h4>
+                        <div class="teaching-card current" [routerLink]="['/sessions-details']">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Science</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a href="javascript:;" dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;" (click)="sendMessageModal.show();">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Join session</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>13.00 pm - 19 pm</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">How was the session?</span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:45%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>Pending</h4>
+                        <div class="teaching-card">
+                            <span class="pending-icon">?</span>
+                            <div class="card-title">
+                                <h4 class="dot-dot">Geography</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;" (click)="sendMessageModal.show();">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Join session</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>13.00 pm - 19 pm</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-3.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <a class="btn btn-link fs-18" href="javascript:;">Accept</a>
+                                    <a class="btn btn-link fs-18 text-center" href="javascript:;">Decline</a>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>History</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Geography</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Join session</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>13.00 pm - 19 pm</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">
+                                <rating [(ngModel)]="rate" [readonly]="isReadonly"></rating>
+                                <span class="display-inline-block margin-left-10">Read review</span>
+                                    </span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:100%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="teaching-workshop" [hidden]="teachingTab!='workshop'">
+                    <div class="teaching-box">
+                        <h4>Currently Teaching</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>Science</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="card-thumb-section">
+                                <span class="display-block margin-bottom-5">Upcoming</span>
+                                <div class="cards">
+                                    <img class="thumb thumb-25" src="images/challenges-posted-3.jpg" alt="thumb" />
+                                    <div class="thumb-text">
+                                        Session with Ryan Huber <br>
+                                        <span class="bullet">Mar 16</span><span>13.00 pm - 19.00 am</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">How was the session?</span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:45%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>Draft</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                            </div>
+                            <div class="card-draft">You still have to<br> complete filling</div>
+                            <div class="teaching-card-bottom">
+                                <button class="btn btn-secondary btn-draft-edit border-radius-0">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>History</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>Science</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="card-thumb-section">
+                                <span class="display-block margin-bottom-5">Upcoming</span>
+                                <div class="cards">
+                                    <img class="thumb thumb-25" src="images/challenges-posted-3.jpg" alt="thumb" />
+                                    <div class="thumb-text">
+                                        Session with Ryan Huber <br>
+                                        <span class="bullet">Mar 16</span><span>13.00 pm - 19.00 am</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">How was the session?</span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:45%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="teaching-workshop" [hidden]="teachingTab!='experiences'">
+                    <div class="teaching-box">
+                        <h4>Currently Teaching</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>Science</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="card-thumb-section">
+                                <span class="display-block margin-bottom-5">Upcoming</span>
+                                <div class="cards">
+                                    <img class="thumb thumb-25" src="images/challenges-posted-3.jpg" alt="thumb" />
+                                    <div class="thumb-text">
+                                        Session with Ryan Huber <br>
+                                        <span class="bullet">Mar 16</span><span>13.00 pm - 19.00 am</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">How was the session?</span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:45%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>Draft</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                            </div>
+                            <div class="card-draft">You still have to<br> complete filling</div>
+                            <div class="teaching-card-bottom">
+                                <button class="btn btn-secondary btn-draft-edit border-radius-0">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teaching-box">
+                        <h4>History</h4>
+                        <div class="teaching-card">
+                            <div class="card-title">
+                                <h4 class="dot-dot">Photography and Lighting</h4>
+                                <div dropdown class="pull-right position-relative">
+                                    <a dropdownToggle type="button" class="dropdown-toggle">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Send message</a></li>
+                                        <li role="menuitem"><a class="dropdown-item" href="javascript:;">Cancel session</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="card-text"><span class="bullet">Mar 16</span><span>Science</span></p>
+                            <div class="card-thumb-section">
+                                <img class="thumb thumb-35 thumb-circle" src="images/challenges-posted-2.jpg" alt="thumb" />
+                                <div class="thumb-text">
+                                    Yuri Alpenberg <br> UX/UI Designer
+                                </div>
+                            </div>
+                            <div class="card-thumb-section">
+                                <span class="display-block margin-bottom-5">Upcoming</span>
+                                <div class="cards">
+                                    <img class="thumb thumb-25" src="images/challenges-posted-3.jpg" alt="thumb" />
+                                    <div class="thumb-text">
+                                        Session with Ryan Huber <br>
+                                        <span class="bullet">Mar 16</span><span>13.00 pm - 19.00 am</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="teaching-card-bottom">
+                                <div class="text-center">
+                                    <span class="margin-bottom-10 display-block">How was the session?</span>
+                                    <span class="receipt-text">Receipt</span>
+                                </div>
+                                <div class="progressBarBox">
+                                    <div class="progressBar">
+                                        <span style="width:45%;"></span>
+                                    </div>
+                                    <span class="pull-right fs-13">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- send message modal start -->
+<div class="modal fade" bsModal #sendMessageModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="Close" (click)="sendMessageModal.hide()">&times;</button>
+            <div class="modal-body">
+                <div class="message-content">
+                    <h2 class="text-center">Send Message</h2>
+                    <div class="message-box">
+                        <input type="text" class="form-control message-to" placeholder="To" />
+                        <textarea class="form-control write-message" rows="8" placeholder="Write message"></textarea>
+                        <div class="attach-files">
+                            <span class="image-thumb thumb-15"></span>
+                            <a href="javascript:;" class="text-link">Attach files/links</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-right">
+                <button class="btn btn-secondary text-right">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- send message modal end -->
